@@ -1,0 +1,12 @@
+*{
+    box-sizing: border-box;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    background-color: #efeef3;
+    font-family: 'Open Sans', sans-serif;
+}
