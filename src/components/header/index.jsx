@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FiMenu } from 'react-icons/fi';
@@ -6,9 +7,21 @@ import { BsFillPersonFill } from 'react-icons/bs';
 import Logo from "./../../assets/imgs/logo.png";
 
 function Header() {
-  const userDataLocalStorage = localStorage.getItem("userData");
-  const unserializedData = JSON.parse(userDataLocalStorage);
-  const nameStorage = unserializedData.name;
+    const [status, setStatus] = useState(false);
+    const [userName, setUserName] = useState("");
+
+
+  useEffect(() => {
+    const userDataLocalStorage = localStorage.getItem("userData");
+
+    if (userDataLocalStorage) {
+      const unserializedData = JSON.parse(userDataLocalStorage);
+      const nameStorage = unserializedData.name;
+      setUserName(nameStorage)
+      setStatus(true);
+    }
+  }, []);
+
   return (
     <>
       <Top>
@@ -19,17 +32,19 @@ function Header() {
         <Center>TattooMeLet</Center>
         <Right>
           <Person />
-          {nameStorage ? (
-            <RightName>
-              <h1>Olá, {nameStorage}</h1>
-            </RightName>
-          ) : (
-            <RightName>
-              <Link to={"/signin"}>
-                <h1>Entrar</h1>
-              </Link>
-            </RightName>
-          )}
+          {
+            (status === false ? (
+              <RightName>
+                <Link to={"/signin"}>
+                  <h1>Entrar</h1>
+                </Link>
+              </RightName>
+            ) : (
+              <RightName>
+                <h1>Olá, { userName }</h1>
+              </RightName>
+            ))
+          }
         </Right>
       </Top>
     </>
