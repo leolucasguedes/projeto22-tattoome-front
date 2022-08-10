@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import { FiMenu } from 'react-icons/fi';
-import { BsFillPersonFill } from 'react-icons/bs';
+import { FiMenu } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
+import { BsFillPersonFill } from "react-icons/bs";
 
 import Logo from "./../../assets/imgs/logo.png";
 
 function Header() {
-    const [status, setStatus] = useState(false);
-    const [userName, setUserName] = useState("");
-
+  const [status, setStatus] = useState(false);
+  const [userName, setUserName] = useState("");
+  const [nav, setNav] = useState(true);
 
   useEffect(() => {
     const userDataLocalStorage = localStorage.getItem("userData");
@@ -17,7 +18,7 @@ function Header() {
     if (userDataLocalStorage) {
       const unserializedData = JSON.parse(userDataLocalStorage);
       const nameStorage = unserializedData.name;
-      setUserName(nameStorage)
+      setUserName(nameStorage);
       setStatus(true);
     }
   }, []);
@@ -25,26 +26,44 @@ function Header() {
   return (
     <>
       <Top>
+        {nav ? (
+          <>
+            <Nav onClick={() => setNav(false)} />
+          </>
+        ) : (
+          <>
+            <Close onClick={() => setNav(true)} />
+            <MenuNav>
+              <Link to={"/gallery"}>
+                <h1>Galeria</h1>
+              </Link>
+              <Link to={"/about"}>
+                <h1>Sobre</h1>
+              </Link>
+              <h1>Depoimentos</h1>
+              <h1>Contato</h1>
+            </MenuNav>
+          </>
+        )}
         <Left>
-          <Nav />
-          <img src={Logo} alt="Logo" />
+          <Link to={"/"}>
+            <img src={Logo} alt="Logo" />
+          </Link>
         </Left>
         <Center>TattooMeLet</Center>
         <Right>
           <Person />
-          {
-            (status === false ? (
-              <RightName>
-                <Link to={"/signin"}>
-                  <h1>Entrar</h1>
-                </Link>
-              </RightName>
-            ) : (
-              <RightName>
-                <h1>Olá, { userName }</h1>
-              </RightName>
-            ))
-          }
+          {status === false ? (
+            <RightName>
+              <Link to={"/signin"}>
+                <h1>Entrar</h1>
+              </Link>
+            </RightName>
+          ) : (
+            <RightName>
+              <h1>Olá, {userName}</h1>
+            </RightName>
+          )}
         </Right>
       </Top>
     </>
@@ -65,16 +84,11 @@ const Top = styled.header`
   top: 0;
   right: 0;
   left: 0;
-  z-index: 1;
+  z-index: 2;
 `;
 
 const Left = styled.div`
-  width: 60px;
-  height: 70px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-left: 5px;
+  margin-left: 90px;
   position: relative;
 
   img {
@@ -102,6 +116,7 @@ const Center = styled.h1`
   line-height: 14.73px;
   color: #000000;
   text-align: center;
+  margin-right: 190px;
 `;
 
 const Right = styled.div`
@@ -137,4 +152,40 @@ const RightName = styled.div`
     color: #015584;
     text-align: center;
   }
+`;
+
+const MenuNav = styled.div`
+  width: 250px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  z-index: -1;
+  padding-top: 30px;
+  margin-top: 72px;
+
+  h1 {
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    line-height: 14.73px;
+    color: #015584;
+    text-align: center;
+    margin: 20px 0;
+  }
+`;
+
+const Close = styled(IoClose)`
+  position: absolute;
+  top: 20px;
+  left: 32px;
+  color: #000000;
+  font-size: 28px;
+  cursor: pointer;
 `;
