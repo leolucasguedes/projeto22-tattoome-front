@@ -13,12 +13,11 @@ function Header() {
   const [nav, setNav] = useState(true);
 
   useEffect(() => {
-    const userDataLocalStorage = localStorage.getItem("userData");
+    const userNameLocalStorage = localStorage.getItem("name");
 
-    if (userDataLocalStorage) {
-      const unserializedData = JSON.parse(userDataLocalStorage);
-      const nameStorage = unserializedData.name;
-      setUserName(nameStorage);
+    if (userNameLocalStorage) {
+      const unserializedName = JSON.parse(userNameLocalStorage);
+      setUserName(unserializedName);
       setStatus(true);
     }
   }, []);
@@ -36,6 +35,9 @@ function Header() {
             <MenuNav>
               <Link to={"/gallery"}>
                 <h1>Galeria</h1>
+              </Link>
+              <Link to={"/schedule"}>
+                <h1>Agendamento</h1>
               </Link>
               <Link to={"/about"}>
                 <h1>Sobre</h1>

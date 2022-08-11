@@ -9,9 +9,10 @@ export default function Signup() {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [signUp, setSignUp] = useState({
+    name: "",
     email: "",
     password: "",
-    name: "",
+    confirmPassword: "",
   });
 
   function postSignUp(e) {
@@ -23,8 +24,9 @@ export default function Signup() {
       navigate("/signin");
     });
     promise.catch((e) => {
-      alert(e);
+      const message = e.response.data
       setLoading(false);
+      alert(`Dados inválidos: ${message}`);
     });
   }
 
@@ -49,6 +51,13 @@ export default function Signup() {
       <div className="form-box">
         <form onSubmit={postSignUp}>
           <input
+            type="text"
+            placeholder="name"
+            onChange={(e) => setSignUp({ ...signUp, username: e.target.value })}
+            value={signUp.username}
+            required
+          ></input>
+          <input
             type="email"
             placeholder="e-mail"
             onChange={(e) => setSignUp({ ...signUp, email: e.target.value })}
@@ -64,9 +73,11 @@ export default function Signup() {
           ></input>
           <input
             type="text"
-            placeholder="name"
-            onChange={(e) => setSignUp({ ...signUp, username: e.target.value })}
-            value={signUp.username}
+            placeholder="confirme a senha"
+            onChange={(e) =>
+              setSignUp({ ...signUp, confirmPassword: e.target.value })
+            }
+            value={signUp.confirmPassword}
             required
           ></input>
           <Button />
