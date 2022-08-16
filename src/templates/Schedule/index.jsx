@@ -1,15 +1,17 @@
 import styled from "styled-components";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
 import userContext from "../../contexts/userContext";
 import Header from "../../components/header";
+import ContainerBox from "../../components/ContainerBox";
 
 const POSTURL = "http://localhost:5000/budget";
 
 function Schedule() {
   const navigate = useNavigate();
-  const {userData, setUserData} = useContext(userContext);
+  const { userData, setUserData } = useContext(userContext);
   const [loading, setLoading] = useState(false);
   const [budget, setBudget] = useState({
     name: "",
@@ -36,7 +38,7 @@ function Schedule() {
 
   function Button() {
     if (!loading) {
-      return <button type="submit">Tudo certo? Pode enviar</button>
+      return <button type="submit">Tudo certo. Pode enviar!</button>;
     }
     if (loading) {
       return (
@@ -95,6 +97,7 @@ function Schedule() {
               value={budget.size}
               required
             ></Input>
+            <ContainerBox />
             <Button />
           </DivInputs>
         </form>
@@ -107,17 +110,17 @@ export default Schedule;
 
 export const Main = styled.main`
   width: 1200px;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-top: 70px;
+  margin-right: 20px;
   margin-bottom: 80px;
 `;
 
 export const DivInputs = styled.div`
   width: 500px;
-  height: 810px;
+  height: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -130,7 +133,7 @@ export const DivInputs = styled.div`
     color: #ffffff;
     background-color: #4a4a59;
     border: none;
-    width: 100px;
+    width: 300px;
     height: 65px;
     border-radius: 6px;
     display: flex;
@@ -140,6 +143,7 @@ export const DivInputs = styled.div`
     font-family: oswald;
     cursor: pointer;
     margin-top: 50px;
+    margin-right: 30px;
   }
 `;
 

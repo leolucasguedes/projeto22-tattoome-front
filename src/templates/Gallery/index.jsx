@@ -73,8 +73,8 @@ const Button = styled.button`
   color: #ffffff;
   background-color: #4a4a59;
   border: none;
-  width: 100px;
-  height: 65px;
+  width: 120px;
+  height: 45px;
   border-radius: 6px;
   display: flex;
   justify-content: center;
@@ -95,23 +95,26 @@ export const DivButtons = styled.div`
 `;
 
 export const Portfolio = styled.div`
-  width: 375px;
+  width: 1075px;
   height: 100%;
   display: flex;
   flex-wrap: wrap;
   text-decoration: none;
+  margin-top: 30px;
+  margin-right: 30px;
   margin-left: 7px;
   padding-bottom: 80px;
 `;
 
 export const Photos = styled.img`
-  width: 30px;
-  height: 50px;
-  margin: 20px 20px;
+  width: 300px;
+  height: 400px;
+  margin: 50px 80px;
 `;
 
 export const NoPhotos = styled.h1`
+font-family: millenia;
 font-size: 22px;
 margin-top: 50px;
-margin-left: 50px;
+margin-left: 420px;
 `;

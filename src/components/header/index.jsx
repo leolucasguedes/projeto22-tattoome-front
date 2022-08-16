@@ -52,7 +52,7 @@ function Header() {
             <img src={Logo} alt="Logo" />
           </Link>
         </Left>
-        <Center>TattooMeLet</Center>
+        <Center>Tattoo me Let</Center>
         <Right>
           <Person />
           {status === false ? (
@@ -112,13 +112,15 @@ const Nav = styled(FiMenu)`
 `;
 
 const Center = styled.h1`
-  font-size: 24px;
+  font-size: 32px;
+  font-family: millenial;
   font-weight: 400;
   font-style: normal;
   line-height: 14.73px;
   color: #000000;
   text-align: center;
   margin-right: 190px;
+  margin-top: 3px;
 `;
 
 const Right = styled.div`
@@ -145,9 +147,13 @@ const RightName = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  border: solid 1px gray;
+  border-radius: 5px;
+  margin-left: 10px;
 
   h1 {
-    font-size: 12px;
+    font-size: 16px;
+    font-family: 'Anton', sans-serif;
     font-weight: 400;
     font-style: normal;
     line-height: 14.73px;
