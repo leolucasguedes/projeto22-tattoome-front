@@ -4,12 +4,15 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 import Header from "../../components/header";
+import CreateDepositionBox from "../../components/createDeposition";
 import Logo from "./../../assets/imgs/logo.png";
-import { AiOutlineStar, AiFillStar } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
+import Footer from "../../components/footer";
 
 function Home() {
   const [status, setStatus] = useState(false);
   const [userName, setUserName] = useState("");
+  const [createBox, setCreateBox] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
   const navigate = useNavigate();
 
@@ -24,7 +27,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    const promise = axios.get("http://localhost:5000/depositions");
+    const promise = axios.get("http://localhost:5000/deposition");
 
     promise.then((response) => {
       const { data } = response;
@@ -48,6 +51,22 @@ function Home() {
         <Div />
         <h1>Depoimentos</h1>
         <DivDepositions>
+          {testimonials ? (
+            testimonials.map((testimonial) => {
+              const { stars, text, username } = testimonial;
+              return (
+                <Depositions>
+                  <DivStars>
+                    for (let i = 0; i = {stars}; i++){<Star />}
+                  </DivStars>
+                  <p>{text}</p>
+                  <h1> - {username}</h1>
+                </Depositions>
+              );
+            })
+          ) : (
+            <></>
+          )}
           <Depositions>
             <DivStars>
               <Star />
@@ -56,43 +75,25 @@ function Home() {
               <Star />
               <Star />
             </DivStars>
-            <p>"Sessão inesquecível"</p>
-            <h1> - Leonardo</h1>
-          </Depositions>
-          <Depositions>
-            <DivStars>
-              <Star />
-              <Star />
-              <Star />
-              <Star />
-              <Star />
-            </DivStars>
-            <p>"Sessão inesquecível, muito boa mesmo"</p>
-            <h1> - Leonardo</h1>
-          </Depositions>
-          <Depositions>
-            <DivStars>
-              <Star />
-              <Star />
-              <Star />
-              <Star />
-              <Star />
-            </DivStars>
-            <p>
-              "Sessão inesquecível, meudeus melhor tatuadora que eu vi na minha
-              vida sério amei"
-            </p>
+            <p>"Sessão excelente, adorei o resultado"</p>
             <h1> - Leonardo</h1>
           </Depositions>
         </DivDepositions>
-        {status === false ? (
+        {status === true ? (
           <></>
         ) : (
           <>
-            <Comment>Escreva um comentário</Comment>
+            <Comment onClick={() => setCreateBox(true)}>Escreva um comentário</Comment>
           </>
         )}
         <Div />
+        {createBox ? (
+          <>
+            <CreateDepositionBox setCreateBox={setCreateBox} username={userName} />
+          </>
+        ) : (
+          <></>
+        )}
         <More>
           <Box>
             <h1>Contato</h1>
@@ -118,6 +119,7 @@ function Home() {
           </Box>
         </More>
       </Main>
+      <Footer />
     </>
   );
 }
@@ -203,6 +205,7 @@ export const Comment = styled.p`
   text-decoration: underline;
   margin-top: -50px;
   margin-bottom: 50px;
+  cursor: pointer;
 `;
 
 export const DivDepositions = styled.div`

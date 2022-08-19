@@ -145,6 +145,19 @@ export const DivInputs = styled.div`
     margin-top: 50px;
     margin-right: 30px;
   }
+  .loading {
+    animation: is-rotating 1s infinite;
+    width: 25px;
+    height: 25px;
+    border: 4px solid #1877f2;
+    border-top-color: #ffffff;
+    border-radius: 50%;
+    margin: 15px;
+  }
+  @keyframes is-rotating {
+    to {
+      transform: rotate(1turn);
+    }
 `;
 
 export const Input = styled.input`
@@ -166,21 +179,4 @@ export const Welcome = styled.h1`
   text-align: center;
   margin-top: 50px;
   margin-right: 50px;
-`;
-
-const load = styled.div`
-  .loading {
-    animation: is-rotating 1s infinite;
-    width: 25px;
-    height: 25px;
-    border: 4px solid #1877f2;
-    border-top-color: #ffffff;
-    border-radius: 50%;
-    margin: 15px;
-  }
-  @keyframes is-rotating {
-    to {
-      transform: rotate(1turn);
-    }
-  }
 `;
