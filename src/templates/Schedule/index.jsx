@@ -5,7 +5,7 @@ import axios from "axios";
 import { useContext, useState } from "react";
 import userContext from "../../contexts/userContext";
 import Header from "../../components/header";
-import ContainerBox from "../../components/ContainerBox";
+import ContainerBox from "../../components/containerBox";
 
 const POSTURL = "http://localhost:5000/budget";
 

@@ -5,9 +5,14 @@ import styled from "styled-components";
 
 import Header from "../../components/header";
 import CreateDepositionBox from "../../components/createDeposition";
+import SlideBox from "../../components/slideBox";
 import Logo from "./../../assets/imgs/logo.png";
 import { AiFillStar } from "react-icons/ai";
 import Footer from "../../components/footer";
+
+import image1 from "./../../assets/imgs/logo.png";
+import image2 from "./../../assets/imgs/artist.png";
+import image3 from "./../../assets/imgs/dk.jpg";
 
 function Home() {
   const [status, setStatus] = useState(false);
@@ -15,6 +20,17 @@ function Home() {
   const [createBox, setCreateBox] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
   const navigate = useNavigate();
+  const slideImages = [
+    {
+      url: image1,
+    },
+    {
+      url: image2,
+    },
+    {
+      url: image3,
+    },
+  ];
 
   useEffect(() => {
     const userNameLocalStorage = localStorage.getItem("name");
@@ -47,7 +63,7 @@ function Home() {
             Faça um orçamento!
           </Button>
         </DivUp>
-        <Banner />
+        <SlideBox slideImages={slideImages} />
         <Div />
         <h1>Depoimentos</h1>
         <DivDepositions>
@@ -67,29 +83,23 @@ function Home() {
           ) : (
             <></>
           )}
-          <Depositions>
-            <DivStars>
-              <Star />
-              <Star />
-              <Star />
-              <Star />
-              <Star />
-            </DivStars>
-            <p>"Sessão excelente, adorei o resultado"</p>
-            <h1> - Leonardo</h1>
-          </Depositions>
         </DivDepositions>
-        {status === true ? (
+        {status === false ? (
           <></>
         ) : (
           <>
-            <Comment onClick={() => setCreateBox(true)}>Escreva um comentário</Comment>
+            <Comment onClick={() => setCreateBox(true)}>
+              Escreva um comentário
+            </Comment>
           </>
         )}
         <Div />
         {createBox ? (
           <>
-            <CreateDepositionBox setCreateBox={setCreateBox} username={userName} />
+            <CreateDepositionBox
+              setCreateBox={setCreateBox}
+              username={userName}
+            />
           </>
         ) : (
           <></>
@@ -133,7 +143,7 @@ export const Main = styled.main`
   align-items: center;
   margin-top: 70px;
   margin-bottom: 80px;
-  margin-right: 50px;
+  margin-left: 120px;
 
   img {
     width: 80px;
@@ -160,17 +170,6 @@ const Button = styled.button`
   font-family: oswald;
   cursor: pointer;
   margin-top: 30px;
-`;
-
-const Banner = styled.div`
-  width: 820px;
-  height: 420px;
-  border: solid 5px #000000;
-  border-radius: 6px;
-  background-color: #ffffff;
-  cursor: pointer;
-  margin-top: 50px;
-  margin-bottom: 100px;
 `;
 
 const DivUp = styled.div`

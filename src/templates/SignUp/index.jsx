@@ -24,7 +24,7 @@ export default function Signup() {
       navigate("/signin");
     });
     promise.catch((e) => {
-      const message = e.response.data
+      const message = e.response.data;
       setLoading(false);
       alert(`Dados inválidos: ${message}`);
     });
@@ -44,36 +44,34 @@ export default function Signup() {
   }
 
   return (
-    <Container>
-      <div className="logo-box">
-        <h1>TattooMeLet</h1>
-      </div>
+    <Main>
       <div className="form-box">
         <form onSubmit={postSignUp}>
+          <h1>TattooMeLet</h1>
           <input
             type="text"
-            placeholder="name"
+            placeholder="Nome"
             onChange={(e) => setSignUp({ ...signUp, username: e.target.value })}
             value={signUp.username}
             required
           ></input>
           <input
             type="email"
-            placeholder="e-mail"
+            placeholder="E-mail"
             onChange={(e) => setSignUp({ ...signUp, email: e.target.value })}
             value={signUp.email}
             required
           ></input>
           <input
             type="password"
-            placeholder="senha"
+            placeholder="Senha de 8 ou mais caracteres"
             onChange={(e) => setSignUp({ ...signUp, password: e.target.value })}
             value={signUp.password}
             required
           ></input>
           <input
             type="text"
-            placeholder="confirme a senha"
+            placeholder="Confirme a senha"
             onChange={(e) =>
               setSignUp({ ...signUp, confirmPassword: e.target.value })
             }
@@ -89,49 +87,38 @@ export default function Signup() {
           </Link>
         </form>
       </div>
-    </Container>
+    </Main>
   );
 }
 
-const Container = styled.div`
+const Main = styled.main`
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: #151515;
+  background-color: #333333;
   display: flex;
-  .logo-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-right: 535px;
-    h1 {
-      color: white;
-      font-size: 106px;
-      font-family: Passion One;
-      width: 442px;
-    }
-    h2 {
-      color: white;
-      font-size: 43px;
-      font-family: Oswald;
-      max-width: 442px;
-    }
-  }
+  justify-content: center;
   .form-box {
-    background-color: #333333;
+    background-color: #efeef3;
     height: 100%;
     width: 535px;
-    position: absolute;
-    right: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    h1 {
+      color: #000000;
+      font-size: 46px;
+      font-family: millenial;
+      position: absolute;
+      top: 170px;
+      right: 160px;
+    }
     form {
       display: flex;
+      margin-top: 100px;
       flex-direction: column;
     }
     input {
@@ -142,6 +129,7 @@ const Container = styled.div`
       margin-bottom: 13px;
       font-size: 27px;
       font-family: oswald;
+      padding-left: 15px;
     }
     input::placeholder {
       padding-left: 17px;
@@ -176,28 +164,13 @@ const Container = styled.div`
     h3 {
       font-family: lato;
       text-decoration: underline;
-      color: #ffffff;
+      color: #000000;
       text-align: center;
       margin-top: 14px;
     }
   }
   @media (max-width: 1000px) {
     flex-direction: column;
-    .logo-box {
-      margin: 27px 0;
-      h1 {
-        color: white;
-        font-size: 76px;
-        width: 237px;
-        text-align: center;
-      }
-      h2 {
-        color: white;
-        font-size: 23px;
-        max-width: 237px;
-        line-height: 34.09px;
-      }
-    }
     .form-box {
       position: relative;
       width: 100%;
