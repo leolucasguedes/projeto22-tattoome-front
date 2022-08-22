@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
+import { userContext } from "../../contexts/userContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -20,6 +21,7 @@ function Home() {
   const [createBox, setCreateBox] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
   const navigate = useNavigate();
+  const { user } = useContext(userContext);
   const slideImages = [
     {
       url: image1,
@@ -33,11 +35,13 @@ function Home() {
   ];
 
   useEffect(() => {
-    const userNameLocalStorage = localStorage.getItem("name");
+    const userLocalStorage = localStorage.getItem("user");
 
-    if (userNameLocalStorage) {
-      const unserializedName = JSON.parse(userNameLocalStorage);
-      setUserName(unserializedName);
+    if (userLocalStorage) {
+      const userInfo = JSON.parse(userLocalStorage);
+      const { sendUser } = userInfo;
+      const { name } = sendUser;
+      setUserName(name);
       setStatus(true);
     }
   }, []);
@@ -73,7 +77,21 @@ function Home() {
               return (
                 <Depositions>
                   <DivStars>
-                    for (let i = 0; i = {stars}; i++){<Star />}
+                  {stars === 100 ? (
+                    <>
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                    <Star />
+                    </>
+                    ) : (
+                      <>
+                    for (let i = 0; i = {stars}; i++){
+                      <Star />
+                      }
+                    </>
+                    )}
                   </DivStars>
                   <p>{text}</p>
                   <h1> - {username}</h1>
@@ -221,6 +239,7 @@ export const DivDepositions = styled.div`
   align-items: center;
   margin-top: 40px;
   margin-left: 40px;
+  overflow-x: scroll;
 `;
 
 export const Depositions = styled.div`

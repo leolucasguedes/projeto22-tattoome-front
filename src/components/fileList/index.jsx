@@ -2,7 +2,7 @@ import styled from "styled-components";
 import React from "react";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { MdCheckCircle, MdError, MdLink, MdMoodBad } from "react-icons/md";
+import { MdCheckCircle, MdError, MdMoodBad } from "react-icons/md";
 import { useFiles } from "../../contexts/fileContext";
 
 const FileList = () => {

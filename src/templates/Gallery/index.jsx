@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "../../components/header";
-import Footer from "../../components/footer";
 
 function Gallery() {
   const [images, setImages] = useState([]);
@@ -48,13 +47,12 @@ function Gallery() {
             <NoPhotos>Bem vindo a galeria!</NoPhotos>
           ) : (
             filtro.map((image) => {
-              const { id } = image;
-              return <Photos key={id} />;
+              const { id, imageURL } = image;
+              return <Photos src={imageURL} key={id} />;
             })
           )}
         </Portfolio>
       </Main>
-      <Footer />
     </>
   );
 }
@@ -69,7 +67,7 @@ export const Main = styled.main`
   align-items: center;
   margin-top: 70px;
   margin-bottom: 80px;
-  margin-left: 120px;
+  margin-left: 100px;
 `;
 
 const Button = styled.button`
@@ -94,7 +92,7 @@ export const DivButtons = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 60px;
+  margin-right: 150px;
 `;
 
 export const Portfolio = styled.div`
@@ -110,9 +108,10 @@ export const Portfolio = styled.div`
 `;
 
 export const Photos = styled.img`
-  width: 300px;
-  height: 400px;
-  margin: 50px 80px;
+  width: 175px;
+  height: 200px;
+  border: solid 1px gray;
+  margin: 30px 30px;
 `;
 
 export const NoPhotos = styled.h1`

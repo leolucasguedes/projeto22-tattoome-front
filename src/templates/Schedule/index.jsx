@@ -3,8 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
-import userContext from "../../contexts/userContext";
-import budgetContext from "../../contexts/budgetContext";
+import { userContext } from "../../contexts/userContext";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import ContainerBox from "../../components/containerBox";
@@ -13,8 +12,7 @@ const POSTURL = "http://localhost:5000/budget";
 
 function Schedule() {
   const navigate = useNavigate();
-  const { userData, setUserData } = useContext(userContext);
-  const { userBudget, setUserBudget } = useContext(budgetContext);
+  const { user } = useContext(userContext);
   const [loading, setLoading] = useState(false);
   const [budget, setBudget] = useState({
     name: "",
@@ -29,13 +27,6 @@ function Schedule() {
     e.preventDefault();
     const promise = axios.post(POSTURL, budget);
     promise.then((res) => {
-      setUserBudget({
-        name: "",
-        email: "",
-        number: "",
-        description: "",
-        size: "",
-      });
       setLoading(false);
       navigate("/");
     });
@@ -74,8 +65,7 @@ function Schedule() {
               type="text"
               placeholder="nome"
               onChange={(e) =>
-                setBudget({ ...budget, name: e.target.value }) &&
-                setUserBudget({ ...budget, name: e.target.value })
+                setBudget({ ...budget, name: e.target.value }) 
               }
               value={budget.name}
               required
@@ -84,8 +74,7 @@ function Schedule() {
               type="email"
               placeholder="e-mail"
               onChange={(e) =>
-                setBudget({ ...budget, email: e.target.value }) &&
-                setUserBudget({ ...budget, email: e.target.value })
+                setBudget({ ...budget, email: e.target.value })
               }
               value={budget.email}
               required
@@ -94,8 +83,7 @@ function Schedule() {
               type="text"
               placeholder="número de celular"
               onChange={(e) =>
-                setBudget({ ...budget, number: e.target.value }) &&
-                setUserBudget({ ...budget, number: e.target.value })
+                setBudget({ ...budget, number: e.target.value })
               }
               value={budget.number}
               required
@@ -104,8 +92,7 @@ function Schedule() {
               type="text"
               placeholder="descrição"
               onChange={(e) =>
-                setBudget({ ...budget, description: e.target.value }) &&
-                setUserBudget({ ...budget, description: e.target.value })
+                setBudget({ ...budget, description: e.target.value })
               }
               value={budget.description}
               required
@@ -114,8 +101,7 @@ function Schedule() {
               type="text"
               placeholder="tamanho"
               onChange={(e) =>
-                setBudget({ ...budget, size: e.target.value }) &&
-                setUserBudget({ ...budget, size: e.target.value })
+                setBudget({ ...budget, size: e.target.value })
               }
               value={budget.size}
               required

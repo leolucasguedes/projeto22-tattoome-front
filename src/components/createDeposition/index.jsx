@@ -29,6 +29,7 @@ function CreateDepositionBox(props) {
     const promise = axios.post(POSTURL, deposition);
     promise.then((res) => {
       setLoading(false);
+      setCreateBox(false);
       navigate("/");
     });
     promise.catch((e) => {

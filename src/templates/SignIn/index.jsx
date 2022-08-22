@@ -2,13 +2,13 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
-import userContext from "../../contexts/userContext";
+import { userContext } from "../../contexts/userContext";
 import logo from "./../../assets/imgs/logoFlower.png";
 
 const POSTURL = "http://localhost:5000/signin";
 
 export default function Signin() {
-  const { userData, setUserData } = useContext(userContext);
+  const { setUser } = useContext(userContext);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [signIn, setSignIn] = useState({ email: "", password: "" });
@@ -18,16 +18,15 @@ export default function Signin() {
     e.preventDefault();
     const promise = axios.post(POSTURL, signIn);
     promise.then((res) => {
-      const { name, token, userId } = res.data;
-      localStorage.setItem("token", token);
-      localStorage.setItem("name", name);
-      setUserData({ ...signIn, name, userId, password: "" });
+      const user = res.data;
+      localStorage.setItem("user", JSON.stringify(user));
+      setUser(user);
       setLoading(false);
       navigate("/");
     });
     promise.catch((e) => {
       const message = e.response.data;
-      setUserData({ ...userData, email: "", password: "" });
+      setUser({});
       setLoading(false);
       alert(`Dados inválidos: ${message}`);
     });

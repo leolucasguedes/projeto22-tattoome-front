@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import userContext from "../../contexts/userContext";
+import { userContext } from "../../contexts/userContext";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
@@ -12,15 +12,14 @@ import Logo from "./../../assets/imgs/logo.png";
 function Header() {
   const [status, setStatus] = useState(false);
   const [selected, setSelected] = useState(false);
+  const [id, setId] = useState(0);
   const [userName, setUserName] = useState("");
   const [nav, setNav] = useState(true);
-  const { userData, setUserData } = useContext(userContext);
-  const { userId } = userData;
   const navigate = useNavigate();
   let ref = useRef();
 
   function signOut() {
-    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     navigate("/");
   }
 
@@ -37,11 +36,14 @@ function Header() {
   }, [selected]);
 
   useEffect(() => {
-    const userNameLocalStorage = localStorage.getItem("name");
+    const userLocalStorage = localStorage.getItem("user");
 
-    if (userNameLocalStorage) {
-      const unserializedName = JSON.parse(userNameLocalStorage);
-      setUserName(unserializedName);
+    if (userLocalStorage) {
+      const userInfo = JSON.parse(userLocalStorage);
+      const { sendUser } = userInfo;
+      const { id, name } = sendUser;
+      setId(id);
+      setUserName(name);
       setStatus(true);
     }
   }, []);
@@ -69,7 +71,7 @@ function Header() {
               {status === false ? (
             <></>
           ) : (
-            <Link to={`/budget/user/${userId}`}>
+            <Link to={`/budget/user/${id}`}>
                 <h1>Histórico</h1>
               </Link>
           )}

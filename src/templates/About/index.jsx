@@ -42,7 +42,7 @@ export const Main = styled.main`
 
   img {
     width: 300px;
-    height: 350px;
+    height: 320px;
     border-radius: 6px;
     margin-top: -130px;
     margin-bottom: 100px;

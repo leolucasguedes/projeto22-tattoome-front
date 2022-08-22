@@ -1,5 +1,5 @@
 import { useState, useEffect, useContext } from "react";
-import userContext from "../../contexts/userContext";
+import { userContext } from "../../contexts/userContext";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "../../components/header";
@@ -7,19 +7,19 @@ import Footer from "../../components/footer";
 
 function Historic() {
   const [budgets, setBudgets] = useState([]);
-  const name = localStorage.getItem('name');
-  const { userData, setUserData } = useContext(userContext);
-  const { userId } = userData;
+  const { user } = useContext(userContext);
+  const { sendUser } = user
+  const { id, name } = sendUser;
 
   useEffect(() => {
-    const promise = axios.get(`http://localhost:5000/budget/user/${userId}`);
+    const promise = axios.get(`http://localhost:5000/budget/user/${id}`);
 
     promise.then((response) => {
       const { data } = response;
-      setBudgets({ data });
+      setBudgets(data);
     });
     promise.catch((err) => console.log(err.response));
-  }, [userId]);
+  }, [id]);
 
   return (
     <>
@@ -33,10 +33,10 @@ function Historic() {
                 <Budget>
                   <div className="upside">
                     <h1>{email}</h1>
-                    <h1>{number}</h1>
+                    <h2>{number}</h2>
                   </div>
                   <p>{description}</p>
-                  <p>{size}</p>
+                  <h3>{size}</h3>
                 </Budget>
               );
             })}
