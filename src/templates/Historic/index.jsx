@@ -1,20 +1,51 @@
+import { useState, useEffect, useContext } from "react";
+import userContext from "../../contexts/userContext";
+import axios from "axios";
 import styled from "styled-components";
 import Header from "../../components/header";
+import Footer from "../../components/footer";
 
-function Historic(){
-    return(
-        <>
-        <Header />
-        <Main>
-            <DivInfo>
-              <DivHistoric>
-              
-              </DivHistoric>
-            </DivInfo>
-        </Main>
-        </>
-    )
-};
+function Historic() {
+  const [budgets, setBudgets] = useState([]);
+  const name = localStorage.getItem('name');
+  const { userData, setUserData } = useContext(userContext);
+  const { userId } = userData;
+
+  useEffect(() => {
+    const promise = axios.get(`http://localhost:5000/budget/user/${userId}`);
+
+    promise.then((response) => {
+      const { data } = response;
+      setBudgets({ data });
+    });
+    promise.catch((err) => console.log(err.response));
+  }, [userId]);
+
+  return (
+    <>
+      <Header />
+      <Main>
+        <DivInfo>
+          <h1>Olá, {name}</h1>
+            {budgets.map((budget) => {
+              const { email, number, description, size } = budget;
+              return (
+                <Budget>
+                  <div className="upside">
+                    <h1>{email}</h1>
+                    <h1>{number}</h1>
+                  </div>
+                  <p>{description}</p>
+                  <p>{size}</p>
+                </Budget>
+              );
+            })}
+        </DivInfo>
+      </Main>
+      <Footer />
+    </>
+  );
+}
 
 export default Historic;
 
@@ -25,6 +56,7 @@ export const Main = styled.main`
   align-items: center;
   margin-top: 70px;
   margin-bottom: 80px;
+  margin-left: 120px;
 `;
 
 export const DivInfo = styled.div`
@@ -37,25 +69,53 @@ export const DivInfo = styled.div`
   margin-left: 7px;
   margin-top: 40px;
   margin-right: 80px;
+
+  h1 {
+    font-family: oswald;
+    font-size: 22px;
+    margin-bottom: 40px;
+  }
 `;
 
-export const DivHistoric = styled.div`
-  width: 400px;
-  height: 100px;
+export const Budget = styled.div`
+  width: 600px;
+  height: 120px;
   display: flex;
-  align-items: center;
-  margin-left: 7px;
-  margin-bottom: 50px;
+  flex-direction: column;
+  flex-wrap: wrap;
+  background-color: #ffffff;
+  border: solid 1px gray;
+  border-radius: 6px;
+  margin-bottom: 20px;
 
-  img{
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
+  h1 {
+    font-family: oswald;
+    font-size: 20px;
+    margin-top: 12px;
+    margin-left: 20px;
+  }
+  h2 {
+    font-family: oswald;
+    font-size: 18px;
+    margin-top: 12px;
+    margin-left: 80px;
   }
 
-  p{
+  p {
     font-size: 14px;
-    margin-left: 20px;
     line-height: 20px;
+    margin-left: 20px;
+    margin-top: -25px;
+  }
+
+  h3 {
+    font-family: oswald;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 20px;
+  }
+
+  .upside {
+    display: flex;
   }
 `;

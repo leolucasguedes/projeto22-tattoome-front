@@ -1,4 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import userContext from "../../contexts/userContext";
+import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { FiMenu } from "react-icons/fi";
@@ -9,8 +11,30 @@ import Logo from "./../../assets/imgs/logo.png";
 
 function Header() {
   const [status, setStatus] = useState(false);
+  const [selected, setSelected] = useState(false);
   const [userName, setUserName] = useState("");
   const [nav, setNav] = useState(true);
+  const { userData, setUserData } = useContext(userContext);
+  const { userId } = userData;
+  const navigate = useNavigate();
+  let ref = useRef();
+
+  function signOut() {
+    localStorage.removeItem("token");
+    navigate("/");
+  }
+
+  useEffect(() => {
+    function OutsideClick(e) {
+      if (selected && ref.current && !ref.current.contains(e.target)) {
+        setSelected(false);
+      }
+    }
+    document.addEventListener("mousedown", OutsideClick);
+    return () => {
+      document.removeEventListener("mousedown", OutsideClick);
+    };
+  }, [selected]);
 
   useEffect(() => {
     const userNameLocalStorage = localStorage.getItem("name");
@@ -42,8 +66,13 @@ function Header() {
               <Link to={"/about"}>
                 <h1>Sobre</h1>
               </Link>
-              <h1>Depoimentos</h1>
-              <h1>Contato</h1>
+              {status === false ? (
+            <></>
+          ) : (
+            <Link to={`/budget/user/${userId}`}>
+                <h1>Histórico</h1>
+              </Link>
+          )}
             </MenuNav>
           </>
         )}
@@ -54,7 +83,25 @@ function Header() {
         </Left>
         <Center>Tattoo me Let</Center>
         <Right>
-          <Person />
+          <DivIcon ref={ref}>
+            <Person onClick={() => setSelected(!selected)} />
+            {selected ? (
+              <>
+                <ion-icon
+                  name="chevron-up-outline"
+                  onClick={() => setSelected(!selected)}
+                ></ion-icon>
+                <div className="log-out" onClick={() => signOut()}>
+                  <h3>Sair da conta</h3>
+                </div>
+              </>
+            ) : (
+              <ion-icon
+                name="chevron-down-outline"
+                onClick={() => setSelected(!selected)}
+              ></ion-icon>
+            )}
+          </DivIcon>
           {status === false ? (
             <RightName>
               <Link to={"/signin"}>
@@ -131,6 +178,35 @@ const Right = styled.div`
   position: relative;
 `;
 
+const DivIcon = styled.div`
+  width: 1px;
+  height: 1px;
+  display: flex;
+  align-items: center;
+  background-color: red;
+  ion-icon {
+    color: white;
+    font-size: 26px;
+    margin: 16px;
+  }
+  .log-out {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 47px;
+    background-color: #ffffff;
+    position: absolute;
+    top: 56px;
+    right: -20px;
+    border-radius: 0 0 20px 20px;
+  }
+  h3 {
+    font-size: 17px;
+    color: #000000;
+  }
+`;
+
 const Person = styled(BsFillPersonFill)`
   position: absolute;
   top: 6px;
@@ -153,7 +229,7 @@ const RightName = styled.div`
 
   h1 {
     font-size: 16px;
-    font-family: 'Anton', sans-serif;
+    font-family: "Anton", sans-serif;
     font-weight: 400;
     font-style: normal;
     line-height: 14.73px;
@@ -186,6 +262,7 @@ const MenuNav = styled.div`
     color: #015584;
     text-align: center;
     margin: 20px 0;
+    cursor: pointer;
   }
 `;
 

@@ -35,6 +35,6 @@ const ContainerBox = styled.div`
 `;
 
 const SlideImage = styled.div`
-  width: 400px;
-  height: 400px;
+  width: 820px;
+  height: 410px;
 `;

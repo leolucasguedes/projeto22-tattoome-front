@@ -4,7 +4,9 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
 import userContext from "../../contexts/userContext";
+import budgetContext from "../../contexts/budgetContext";
 import Header from "../../components/header";
+import Footer from "../../components/footer";
 import ContainerBox from "../../components/containerBox";
 
 const POSTURL = "http://localhost:5000/budget";
@@ -12,6 +14,7 @@ const POSTURL = "http://localhost:5000/budget";
 function Schedule() {
   const navigate = useNavigate();
   const { userData, setUserData } = useContext(userContext);
+  const { userBudget, setUserBudget } = useContext(budgetContext);
   const [loading, setLoading] = useState(false);
   const [budget, setBudget] = useState({
     name: "",
@@ -26,6 +29,13 @@ function Schedule() {
     e.preventDefault();
     const promise = axios.post(POSTURL, budget);
     promise.then((res) => {
+      setUserBudget({
+        name: "",
+        email: "",
+        number: "",
+        description: "",
+        size: "",
+      });
       setLoading(false);
       navigate("/");
     });
@@ -63,21 +73,30 @@ function Schedule() {
             <Input
               type="text"
               placeholder="nome"
-              onChange={(e) => setBudget({ ...budget, name: e.target.value })}
+              onChange={(e) =>
+                setBudget({ ...budget, name: e.target.value }) &&
+                setUserBudget({ ...budget, name: e.target.value })
+              }
               value={budget.name}
               required
             ></Input>
             <Input
               type="email"
               placeholder="e-mail"
-              onChange={(e) => setBudget({ ...budget, email: e.target.value })}
+              onChange={(e) =>
+                setBudget({ ...budget, email: e.target.value }) &&
+                setUserBudget({ ...budget, email: e.target.value })
+              }
               value={budget.email}
               required
             ></Input>
             <Input
               type="text"
               placeholder="número de celular"
-              onChange={(e) => setBudget({ ...budget, number: e.target.value })}
+              onChange={(e) =>
+                setBudget({ ...budget, number: e.target.value }) &&
+                setUserBudget({ ...budget, number: e.target.value })
+              }
               value={budget.number}
               required
             ></Input>
@@ -85,7 +104,8 @@ function Schedule() {
               type="text"
               placeholder="descrição"
               onChange={(e) =>
-                setBudget({ ...budget, description: e.target.value })
+                setBudget({ ...budget, description: e.target.value }) &&
+                setUserBudget({ ...budget, description: e.target.value })
               }
               value={budget.description}
               required
@@ -93,7 +113,10 @@ function Schedule() {
             <Input
               type="text"
               placeholder="tamanho"
-              onChange={(e) => setBudget({ ...budget, size: e.target.value })}
+              onChange={(e) =>
+                setBudget({ ...budget, size: e.target.value }) &&
+                setUserBudget({ ...budget, size: e.target.value })
+              }
               value={budget.size}
               required
             ></Input>
@@ -102,6 +125,7 @@ function Schedule() {
           </DivInputs>
         </form>
       </Main>
+      <Footer />
     </>
   );
 }
@@ -116,6 +140,7 @@ export const Main = styled.main`
   margin-top: 70px;
   margin-right: 20px;
   margin-bottom: 80px;
+  margin-left: 120px;
 `;
 
 export const DivInputs = styled.div`

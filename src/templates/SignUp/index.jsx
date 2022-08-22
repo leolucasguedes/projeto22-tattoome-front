@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useState } from "react";
+import logo from "./../../assets/imgs/logoFlower.png";
 
 const POSTURL = "http://localhost:5000/signup";
 
@@ -48,6 +49,7 @@ export default function Signup() {
       <div className="form-box">
         <form onSubmit={postSignUp}>
           <h1>TattooMeLet</h1>
+          <img src={logo} alt="Logo" />
           <input
             type="text"
             placeholder="Nome"
@@ -115,6 +117,13 @@ const Main = styled.main`
       position: absolute;
       top: 170px;
       right: 160px;
+    }
+    img {
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      top: 145px;
+      right: 80px;
     }
     form {
       display: flex;

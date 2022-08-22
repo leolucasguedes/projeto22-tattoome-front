@@ -10,9 +10,9 @@ import Logo from "./../../assets/imgs/logo.png";
 import { AiFillStar } from "react-icons/ai";
 import Footer from "../../components/footer";
 
-import image1 from "./../../assets/imgs/logo.png";
-import image2 from "./../../assets/imgs/artist.png";
-import image3 from "./../../assets/imgs/dk.jpg";
+import image1 from "./../../assets/imgs/IMG1.jpg";
+import image2 from "./../../assets/imgs/IMG2.jpg";
+import image3 from "./../../assets/imgs/IMG3.jpg";
 
 function Home() {
   const [status, setStatus] = useState(false);
@@ -107,12 +107,19 @@ function Home() {
         <More>
           <Box>
             <h1>Contato</h1>
-            <button>Enviar Mensagem</button>
+            <a href="https://wa.me/5521981698136" target="_blank" rel="noreferrer">
+              <button>Enviar Mensagem</button>
+            </a>
             <p>(21) 98169-8136</p>
           </Box>
           <Box>
             <h1>Endereço</h1>
-            <button>Ver Rotas</button>
+            <a
+              href="https://www.google.com.br/maps/place/R.+Nossa+Sra.+das+Merc%C3%AAs,+185+-+Fonseca,+Niter%C3%B3i+-+RJ,+24130-050/@-22.878866,-43.1051991,17z/data=!3m1!4b1!4m5!3m4!1s0x998383f60cde91:0x7cc67e0418fb5ee5!8m2!3d-22.878866!4d-43.1030104"
+              target="_blank" rel="noreferrer"
+            >
+              <button>Ver Rotas</button>
+            </a>
             <p>R. Nossa Senhora das Mercês 185 - apto 812 - Fonseca</p>
             <p>Rio de Janeiro - RJ</p>
             <p>24130-050</p>

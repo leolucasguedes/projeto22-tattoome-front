@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import Header from "../../components/header";
+import Footer from "../../components/footer";
 import { textAbout, textPlace } from "./text";
 
 import Artist from "./../../assets/imgs/artist.png";
+import Insta from "./../../assets/imgs/insta.jpg";
 
 function About(){
     return(
@@ -18,8 +20,11 @@ function About(){
                 <p>all about the place, the history and the job - {textPlace}</p>
               </DivPlace>
             </DivInfo>
-            <Banner />
+            <a href="https://www.instagram.com/tattoomelet/" target="_blank" rel="noreferrer">
+            <img src={Insta} alt="Instagram" />
+            </a>
         </Main>
+        <Footer />
         </>
     )
 };
@@ -31,8 +36,19 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 70px;
+  margin-top: 100px;
   margin-bottom: 80px;
+  margin-left: 120px;
+
+  img {
+    width: 300px;
+    height: 350px;
+    border-radius: 6px;
+    margin-top: -130px;
+    margin-bottom: 100px;
+    margin-right: 80px;
+    cursor: pointer;
+  }
 `;
 
 export const DivInfo = styled.div`
@@ -56,14 +72,14 @@ export const DivPerson = styled.div`
   margin-bottom: 50px;
 
   img{
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
+    margin-top: 40px;
   }
 
   p{
     font-size: 14px;
-    margin-left: 20px;
     line-height: 20px;
   }
 `;
@@ -82,15 +98,4 @@ export const DivPlace = styled.div`
     font-size: 14px;
     line-height: 18px;
   }
-`;
-
-const Banner = styled.div`
-  width: 350px;
-  height: 200px;
-  border-radius: 6px;
-  background-color: #ffffff;
-  cursor: pointer;
-  margin-top: -130px;
-  margin-bottom: 100px;
-  margin-right: 80px;
 `;

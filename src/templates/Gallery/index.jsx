@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import styled from "styled-components";
 import Header from "../../components/header";
+import Footer from "../../components/footer";
 
 function Gallery() {
   const [images, setImages] = useState([]);
@@ -53,6 +54,7 @@ function Gallery() {
           )}
         </Portfolio>
       </Main>
+      <Footer />
     </>
   );
 }
@@ -67,6 +69,7 @@ export const Main = styled.main`
   align-items: center;
   margin-top: 70px;
   margin-bottom: 80px;
+  margin-left: 120px;
 `;
 
 const Button = styled.button`

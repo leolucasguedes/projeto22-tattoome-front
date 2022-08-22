@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useContext, useState } from "react";
 import userContext from "../../contexts/userContext";
+import logo from "./../../assets/imgs/logoFlower.png";
 
 const POSTURL = "http://localhost:5000/signin";
 
@@ -49,6 +50,7 @@ export default function Signin() {
       <div className="form-box">
         <form onSubmit={postSignIn}>
           <h1>TattooMeLet</h1>
+          <img src={logo} alt="Logo" />
           <input
             type="email"
             placeholder="E-mail"
@@ -98,8 +100,15 @@ const Main = styled.main`
       font-size: 46px;
       font-family: millenial;
       position: absolute;
-      top: 170px;
+      top: 180px;
       right: 160px;
+    }
+    img {
+      width: 80px;
+      height: 80px;
+      position: absolute;
+      top: 155px;
+      right: 80px;
     }
     form {
       display: flex;
