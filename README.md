@@ -1,3 +1,62 @@
+<p align="center">
+  <img src="https://freesvg.org/img/1579606964tattoo-machine-silhouette-freesvg.org.png"
+    width="180px" height="180px" >
+</p>
+<h1 align="center">
+  TattooMeLet
+</h1>
+<div align="center">
+
+  <h3>Built With</h3>
+
+  <img src="https://img.shields.io/badge/React.JS-316192?style=for-the-badge&logo=react&logoColor=white" height="30px"/>
+  <img src="https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white" height="30px"/>
+  <img src="https://img.shields.io/badge/NPM-%23000000.svg?style=for-the-badge&logo=npm&logoColor=white" height="30px"/>  
+ 
+</div>
+
+<br/>
+
+# Description
+
+TattooMeLet-front is an application of a tattoo studio. You can create an account, see the work gallery, send budgets to the artist, see your budgets, send depositions and more!
+</br>
+
+## Features
+
+-   Create an account
+-   Get the gallery photos
+-   Send budgets and references
+-   Get your personal budgets
+-   Send depositions
+-   Get users depositions
+
+</br>
+
+## Environment Variables
+
+To run this project, you will need to add the following environment variables to your .env file
+
+`REACT_API_URL = http://Hostname:Port/`
+
+</br>
+
+## Lessons Learned
+
+In this project I learned a lot about how to create a full front-end application by myself
+
+</br>
+
+## Authors
+
+-   [@leolucasguedes](https://www.github.com/leolucasguedes)
+
+<br/>
+
+<a  href="mailto:contato.leonardo.lucas0611@gmail.com" target="_blank"><img src="https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg"></a>
+
+<br/>
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
