@@ -17,6 +17,9 @@ function CreateDepositionBox(props) {
     username: "",
   });
   const navigate = useNavigate();
+  const user = localStorage.getItem("user");
+  const { sendUser } = JSON.parse(user);
+  const { token } = sendUser;
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -26,7 +29,11 @@ function CreateDepositionBox(props) {
   function sendDeposition(e) {
     setLoading(true);
     e.preventDefault();
-    const promise = axios.post(POSTURL, deposition);
+    const promise = axios.post(POSTURL, deposition, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
     promise.then((res) => {
       setLoading(false);
       setCreateBox(false);

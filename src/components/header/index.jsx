@@ -20,7 +20,7 @@ function Header() {
 
   function signOut() {
     localStorage.removeItem("user");
-    navigate("/");
+    navigate("/signin");
   }
 
   useEffect(() => {
@@ -206,6 +206,7 @@ const DivIcon = styled.div`
   h3 {
     font-size: 17px;
     color: #000000;
+    cursor: pointer;
   }
 `;
 

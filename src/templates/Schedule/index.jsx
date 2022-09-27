@@ -13,6 +13,10 @@ const POSTURL = "http://localhost:5000/budget";
 function Schedule() {
   const navigate = useNavigate();
   const { user } = useContext(userContext);
+  let userId = "";
+  if (user) {
+    userId = user.id;
+  }
   const [loading, setLoading] = useState(false);
   const [budget, setBudget] = useState({
     name: "",
@@ -20,6 +24,7 @@ function Schedule() {
     number: "",
     description: "",
     size: "",
+    userId: "",
   });
 
   function sendBudget(e) {

@@ -139,6 +139,7 @@ const Main = styled.main`
       align-items: center;
       font-size: 27px;
       font-family: oswald;
+      cursor: pointer;
     }
     .loading {
       animation: is-rotating 1s infinite;
