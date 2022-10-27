@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import axios from "axios";
 import styled from "styled-components";
+import api from "../../services/api";
 import Header from "../../components/header";
 
 function Gallery() {
@@ -9,7 +9,7 @@ function Gallery() {
   const [etapa, setEtapa] = useState("");
 
   useEffect(() => {
-    const promise = axios.get("http://localhost:5000/images");
+    const promise = api.get('/images');
 
     promise.then((response) => {
       const { data } = response;

@@ -1,10 +1,8 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 import { useState } from "react";
 import logo from "./../../assets/imgs/logoFlower.png";
-
-const POSTURL = "http://localhost:5000/signup";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -19,7 +17,7 @@ export default function Signup() {
   function postSignUp(e) {
     setLoading(true);
     e.preventDefault();
-    const promise = axios.post(POSTURL, signUp);
+    const promise = api.post('/signup', signUp);
     promise.then((res) => {
       setLoading(false);
       navigate("/signin");

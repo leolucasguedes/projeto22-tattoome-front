@@ -1,36 +1,38 @@
 import styled from "styled-components";
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 import { useContext, useState } from "react";
 import { userContext } from "../../contexts/userContext";
+import { budgetContext } from "../../contexts/budgetContext";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 import ContainerBox from "../../components/containerBox";
 
-const POSTURL = "http://localhost:5000/budget";
-
 function Schedule() {
   const navigate = useNavigate();
   const { user } = useContext(userContext);
+ 
   let userId = "";
   if (user) {
     userId = user.id;
   }
+  
   const [loading, setLoading] = useState(false);
-  const [budget, setBudget] = useState({
-    name: "",
-    email: "",
-    number: "",
-    description: "",
-    size: "",
-    userId: "",
-  });
-
+  const { budget, setBudget } = useContext(budgetContext);
+  const budgetDone = {
+    name: budget.name,
+    email: budget.email,
+    number: budget.number,
+    description: budget.description,
+    size: budget.size,
+    userId: userId,
+  }
+ 
   function sendBudget(e) {
     setLoading(true);
     e.preventDefault();
-    const promise = axios.post(POSTURL, budget);
+    const promise = api.post('/budget', budgetDone);
     promise.then((res) => {
       setLoading(false);
       navigate("/");

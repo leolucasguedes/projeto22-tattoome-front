@@ -1,11 +1,9 @@
 import { useState } from "react";
-import axios from "axios";
+import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Rating } from "react-simple-star-rating";
 import { IoClose } from "react-icons/io5";
-
-const POSTURL = "http://localhost:5000/deposition";
 
 function CreateDepositionBox(props) {
   const { setCreateBox, userName } = props;
@@ -29,7 +27,7 @@ function CreateDepositionBox(props) {
   function sendDeposition(e) {
     setLoading(true);
     e.preventDefault();
-    const promise = axios.post(POSTURL, deposition, {
+    const promise = api.post('/deposition', deposition, {
       headers: {
         Authorization: `Bearer ${token}`,
       },

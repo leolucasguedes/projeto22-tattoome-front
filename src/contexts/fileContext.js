@@ -5,10 +5,9 @@ import React, {
   useCallback,
   useContext,
 } from "react";
+import api from "../services/api";
 import { v4 as uuidv4 } from "uuid";
 import filesize from "filesize";
-
-import api from "../services/api";
 
 const FileContext = createContext({});
 

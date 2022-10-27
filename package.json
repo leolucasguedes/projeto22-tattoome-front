@@ -4,6 +4,8 @@
   "private": true,
   "dependencies": {
     "axios": "^0.27.2",
+    "dotenv": "^16.0.3",
+    "dotenv-cli": "^6.0.0",
     "filesize": "^9.0.11",
     "lodash": "^4.17.21",
     "react": "^17.0.2",

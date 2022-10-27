@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { userContext } from "../../contexts/userContext";
-import axios from "axios";
+import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -47,7 +47,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    const promise = axios.get("http://localhost:5000/deposition");
+    const promise = api.get('/deposition');
 
     promise.then((response) => {
       const { data } = response;
@@ -55,6 +55,14 @@ function Home() {
     });
     promise.catch((err) => console.log(err.response));
   }, []);
+
+  function renderStars(stars) {
+      if(stars === 20)  return <Star />
+      if(stars === 40)  return <> <Star /> <Star /> </>
+      if(stars === 60)  return <> <Star /> <Star /> <Star /> </>
+      if(stars === 80)  return <> <Star /> <Star /> <Star /> <Star /> </>
+      if(stars === 100) return <> <Star /> <Star /> <Star /> <Star /> <Star /> </>
+  }
 
   return (
     <>
@@ -77,21 +85,7 @@ function Home() {
               return (
                 <Depositions>
                   <DivStars>
-                  {stars === 100 ? (
-                    <>
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                    <Star />
-                    </>
-                    ) : (
-                      <>
-                    for (let i = 0; i = {stars}; i++){
-                      <Star />
-                      }
-                    </>
-                    )}
+                    {renderStars(stars)}
                   </DivStars>
                   <p>{text}</p>
                   <h1> - {username}</h1>

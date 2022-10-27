@@ -1,6 +1,6 @@
 import { useState, useEffect, useContext } from "react";
 import { userContext } from "../../contexts/userContext";
-import axios from "axios";
+import api from "../../services/api";
 import styled from "styled-components";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
@@ -12,7 +12,7 @@ function Historic() {
   const { id, name } = sendUser;
 
   useEffect(() => {
-    const promise = axios.get(`http://localhost:5000/budget/user/${id}`);
+    const promise = api.get(`/user/${id}`);
 
     promise.then((response) => {
       const { data } = response;

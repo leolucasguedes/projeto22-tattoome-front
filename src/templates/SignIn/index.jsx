@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
-import axios from "axios";
+import api from "../../services/api";
 import { useContext, useState } from "react";
 import { userContext } from "../../contexts/userContext";
 import logo from "./../../assets/imgs/logoFlower.png";
-
-const POSTURL = "http://localhost:5000/signin";
 
 export default function Signin() {
   const { setUser } = useContext(userContext);
@@ -16,7 +14,7 @@ export default function Signin() {
   function postSignIn(e) {
     setLoading(true);
     e.preventDefault();
-    const promise = axios.post(POSTURL, signIn);
+    const promise = api.post('/signin', signIn);
     promise.then((res) => {
       const user = res.data;
       localStorage.setItem("user", JSON.stringify(user));
