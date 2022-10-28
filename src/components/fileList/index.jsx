@@ -23,17 +23,15 @@ const FileList = () => {
     <Container>
       {files.map((uploadedFile) => (
         <li key={uploadedFile.id}>
-          <FileInfo>
+          <FileInfo key={uploadedFile.id}>
             <Preview src={uploadedFile.preview} />
             <div>
               <strong>{uploadedFile.name}</strong>
               <span>
                 {uploadedFile.readableSize}{" "}
-                {!!uploadedFile.url && (
                   <button onClick={(e) => deleteFile(uploadedFile.id)}>
                     Excluir
                   </button>
-                )}
               </span>
             </div>
           </FileInfo>
@@ -90,9 +88,13 @@ export const FileInfo = styled.div`
     span {
       font-size: 12px;
       color: #999;
-      margin-top: 5px;
+      margin-top: 7px;
 
       button {
+        font-size: 15px;
+        position: absolute;
+        bottom: -26.15px;
+        right: 95px;
         border: 0;
         background: transparent;
         color: #e57878;

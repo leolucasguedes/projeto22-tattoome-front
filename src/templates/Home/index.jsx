@@ -16,8 +16,6 @@ import image2 from "./../../assets/imgs/IMG2.jpg";
 import image3 from "./../../assets/imgs/IMG3.jpg";
 
 function Home() {
-  const [status, setStatus] = useState(false);
-  const [userName, setUserName] = useState("");
   const [createBox, setCreateBox] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
   const navigate = useNavigate();
@@ -33,18 +31,6 @@ function Home() {
       url: image3,
     },
   ];
-
-  useEffect(() => {
-    const userLocalStorage = localStorage.getItem("user");
-
-    if (userLocalStorage) {
-      const userInfo = JSON.parse(userLocalStorage);
-      const { sendUser } = userInfo;
-      const { name } = sendUser;
-      setUserName(name);
-      setStatus(true);
-    }
-  }, []);
 
   useEffect(() => {
     const promise = api.get('/deposition');
@@ -80,10 +66,10 @@ function Home() {
         <h1>Depoimentos</h1>
         <DivDepositions>
           {testimonials ? (
-            testimonials.map((testimonial) => {
+            testimonials.map((testimonial, index) => {
               const { stars, text, username } = testimonial;
               return (
-                <Depositions>
+                <Depositions key={index}>
                   <DivStars>
                     {renderStars(stars)}
                   </DivStars>
@@ -96,21 +82,21 @@ function Home() {
             <></>
           )}
         </DivDepositions>
-        {status === false ? (
-          <></>
-        ) : (
+        {user ? (
           <>
-            <Comment onClick={() => setCreateBox(true)}>
-              Escreva um comentário
-            </Comment>
-          </>
+          <Comment onClick={() => setCreateBox(true)}>
+            Escreva um comentário
+          </Comment>
+        </>   
+        ) : (
+          <></>
         )}
         <Div />
         {createBox ? (
           <>
             <CreateDepositionBox
               setCreateBox={setCreateBox}
-              username={userName}
+              user={user}
             />
           </>
         ) : (

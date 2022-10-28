@@ -15,24 +15,6 @@ const FileProvider = ({ children }) => {
   const [uploadedFiles, setUploadedFiles] = useState([]);
 
   useEffect(() => {
-    api.get("posts").then((response) => {
-      const postFormatted = response.data.map((post) => {
-        return {
-          ...post,
-          id: post._id,
-          preview: post.url,
-          readableSize: filesize(post.size),
-          file: null,
-          error: false,
-          uploaded: true,
-        };
-      });
-
-      setUploadedFiles(postFormatted);
-    });
-  }, []);
-
-  useEffect(() => {
     return () => {
       uploadedFiles.forEach((file) => URL.revokeObjectURL(file.preview));
     };
@@ -59,7 +41,7 @@ const FileProvider = ({ children }) => {
             );
 
             console.log(
-              `A imagem ${uploadedFile.name} est√° ${progress}% carregada... `
+              `A imagem ${uploadedFile.name} está ${progress}% carregada... `
             );
 
             updateFile(uploadedFile.id, { progress });
@@ -67,7 +49,7 @@ const FileProvider = ({ children }) => {
         })
         .then((response) => {
           console.log(
-            `A imagem ${uploadedFile.name} j√° foi enviada para o servidor!`
+            `A imagem ${uploadedFile.name} já foi enviada para o servidor!`
           );
 
           updateFile(uploadedFile.id, {
@@ -78,7 +60,7 @@ const FileProvider = ({ children }) => {
         })
         .catch((err) => {
           console.error(
-            `Houve um problema para fazer upload da imagem ${uploadedFile.name} no servidor AWS`
+            `Houve um problema para fazer upload da imagem ${uploadedFile.name} no servidor.`
           );
           console.log(err);
           updateFile(uploadedFile.id, {
@@ -103,8 +85,6 @@ const FileProvider = ({ children }) => {
         url: "",
       }));
 
-      // concat é mais performático que ...spread
-      // https://www.malgol.com/how-to-merge-two-arrays-in-javascript/
       setUploadedFiles((state) => state.concat(newUploadedFiles));
       newUploadedFiles.forEach(processUpload);
     },

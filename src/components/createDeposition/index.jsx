@@ -6,7 +6,9 @@ import { Rating } from "react-simple-star-rating";
 import { IoClose } from "react-icons/io5";
 
 function CreateDepositionBox(props) {
-  const { setCreateBox, userName } = props;
+  const { setCreateBox, user } = props;
+  const { sendUser } = user;
+  const { token, name } = sendUser;
   const [loading, setLoading] = useState(false);
   const [rating, setRating] = useState(0);
   const [deposition, setDeposition] = useState({
@@ -15,9 +17,6 @@ function CreateDepositionBox(props) {
     username: "",
   });
   const navigate = useNavigate();
-  const user = localStorage.getItem("user");
-  const { sendUser } = JSON.parse(user);
-  const { token } = sendUser;
 
   const handleRating = (rate) => {
     setRating(rate);
@@ -81,7 +80,7 @@ function CreateDepositionBox(props) {
               onChange={(e) =>
                 setDeposition({ ...deposition, username: e.target.value })
               }
-              value={deposition.username}
+              value={name}
               required
             ></Input>
             <Button />

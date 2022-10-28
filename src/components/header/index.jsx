@@ -10,12 +10,12 @@ import { BsFillPersonFill } from "react-icons/bs";
 import Logo from "./../../assets/imgs/logo.png";
 
 function Header() {
-  const [status, setStatus] = useState(false);
   const [selected, setSelected] = useState(false);
-  const [id, setId] = useState(0);
-  const [userName, setUserName] = useState("");
   const [nav, setNav] = useState(true);
   const navigate = useNavigate();
+  const { user } = useContext(userContext);
+  const { sendUser } = user;
+  const { id, name } = sendUser;
   let ref = useRef();
 
   function signOut() {
@@ -34,19 +34,6 @@ function Header() {
       document.removeEventListener("mousedown", OutsideClick);
     };
   }, [selected]);
-
-  useEffect(() => {
-    const userLocalStorage = localStorage.getItem("user");
-
-    if (userLocalStorage) {
-      const userInfo = JSON.parse(userLocalStorage);
-      const { sendUser } = userInfo;
-      const { id, name } = sendUser;
-      setId(id);
-      setUserName(name);
-      setStatus(true);
-    }
-  }, []);
 
   return (
     <>
@@ -68,13 +55,13 @@ function Header() {
               <Link to={"/about"}>
                 <h1>Sobre</h1>
               </Link>
-              {status === false ? (
-            <></>
-          ) : (
-            <Link to={`/budget/user/${id}`}>
-                <h1>Histórico</h1>
-              </Link>
-          )}
+              {user ? (
+                <Link to={`/budget/user/${id}`}>
+                  <h1>Histórico</h1>
+                </Link>
+              ) : (
+                <></>
+              )}
             </MenuNav>
           </>
         )}
@@ -104,15 +91,15 @@ function Header() {
               ></ion-icon>
             )}
           </DivIcon>
-          {status === false ? (
+          {user ? (
+            <RightName>
+              <h1>Olá, {name}</h1>
+            </RightName>
+          ) : (
             <RightName>
               <Link to={"/signin"}>
                 <h1>Entrar</h1>
               </Link>
-            </RightName>
-          ) : (
-            <RightName>
-              <h1>Olá, {userName}</h1>
             </RightName>
           )}
         </Right>
