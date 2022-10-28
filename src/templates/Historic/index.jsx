@@ -12,7 +12,7 @@ function Historic() {
   const { id, name } = sendUser;
 
   useEffect(() => {
-    const promise = api.get(`/user/${id}`);
+    const promise = api.get(`/budget/user/${id}`);
 
     promise.then((response) => {
       const { data } = response;
@@ -27,10 +27,10 @@ function Historic() {
       <Main>
         <DivInfo>
           <h1>Olá, {name}</h1>
-            {budgets.map((budget) => {
+            {budgets.map((budget, index) => {
               const { email, number, description, size } = budget;
               return (
-                <Budget>
+                <Budget key={index}>
                   <div className="upside">
                     <h1>{email}</h1>
                     <h2>{number}</h2>
@@ -56,7 +56,7 @@ export const Main = styled.main`
   align-items: center;
   margin-top: 70px;
   margin-bottom: 80px;
-  margin-left: 120px;
+  margin-left: 150px;
 `;
 
 export const DivInfo = styled.div`

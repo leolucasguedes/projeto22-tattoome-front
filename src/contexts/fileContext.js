@@ -6,7 +6,6 @@ import React, {
   useContext,
 } from "react";
 import api from "../services/api";
-import { v4 as uuidv4 } from "uuid";
 import filesize from "filesize";
 
 const FileContext = createContext({});
@@ -54,8 +53,8 @@ const FileProvider = ({ children }) => {
 
           updateFile(uploadedFile.id, {
             uploaded: true,
-            id: response.data._id,
-            url: response.data.url,
+            id: response.data.id,
+            url: response.data.image,
           });
         })
         .catch((err) => {
@@ -75,7 +74,7 @@ const FileProvider = ({ children }) => {
     (files) => {
       const newUploadedFiles = files.map((file) => ({
         file,
-        id: uuidv4(),
+        id: file.id,
         name: file.name,
         readableSize: filesize(file.size),
         preview: URL.createObjectURL(file),

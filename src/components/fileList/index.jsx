@@ -24,7 +24,7 @@ const FileList = () => {
       {files.map((uploadedFile) => (
         <li key={uploadedFile.id}>
           <FileInfo key={uploadedFile.id}>
-            <Preview src={uploadedFile.preview} />
+            <Preview key={uploadedFile.id} src={uploadedFile.preview} />
             <div>
               <strong>{uploadedFile.name}</strong>
               <span>
