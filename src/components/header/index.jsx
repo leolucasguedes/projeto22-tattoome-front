@@ -9,9 +9,14 @@ function Header() {
   const [selected, setSelected] = useState(false);
   const [nav, setNav] = useState(true);
   const navigate = useNavigate();
+  let id;
+  let name;
   const { user } = useContext(userContext);
-  const { sendUser } = user;
-  const { id, name } = sendUser;
+  if (user) {
+    const { sendUser } = user;
+    name = sendUser.name;
+    id = sendUser.id;
+  }
   let ref = useRef();
 
   function signOut() {
@@ -77,17 +82,17 @@ function Header() {
         <stylized.Center>Tattoo me Let</stylized.Center>
         <stylized.Right>
           <stylized.Person onClick={() => setSelected(!selected)} />
-            {selected ? (
-              <>
-                <stylized.Less onClick={() => setSelected(!selected)} /> 
-                <stylized.Logout onClick={() => signOut()}>
+          {selected ? (
+            <>
+              <stylized.Less onClick={() => setSelected(!selected)} />
+              <stylized.Logout onClick={() => signOut()}>
                 <stylized.GoOut onClick={() => setSelected(!selected)} />
-                  <h3>Sair da conta</h3>
-                </stylized.Logout>
-              </>
-            ) : (
-              <stylized.More onClick={() => setSelected(!selected)} />
-            )}
+                <h3>Sair da conta</h3>
+              </stylized.Logout>
+            </>
+          ) : (
+            <stylized.More onClick={() => setSelected(!selected)} />
+          )}
           {user ? (
             <stylized.RightName>
               <h1>Olá, {name}</h1>
