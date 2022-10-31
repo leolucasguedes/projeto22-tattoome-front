@@ -70,7 +70,7 @@ function Schedule() {
           <DivInputs>
             <Input
               type="text"
-              placeholder="nome"
+              placeholder="Nome"
               onChange={(e) =>
                 setBudget({ ...budget, name: e.target.value }) 
               }
@@ -79,7 +79,7 @@ function Schedule() {
             ></Input>
             <Input
               type="email"
-              placeholder="e-mail"
+              placeholder="E-mail"
               onChange={(e) =>
                 setBudget({ ...budget, email: e.target.value })
               }
@@ -88,7 +88,7 @@ function Schedule() {
             ></Input>
             <Input
               type="text"
-              placeholder="número de celular"
+              placeholder="Telefone para contato"
               onChange={(e) =>
                 setBudget({ ...budget, number: e.target.value })
               }
@@ -97,7 +97,7 @@ function Schedule() {
             ></Input>
             <Input
               type="text"
-              placeholder="descrição"
+              placeholder="Descrição"
               onChange={(e) =>
                 setBudget({ ...budget, description: e.target.value })
               }
@@ -106,7 +106,7 @@ function Schedule() {
             ></Input>
             <Input
               type="text"
-              placeholder="tamanho"
+              placeholder="Tamanho"
               onChange={(e) =>
                 setBudget({ ...budget, size: e.target.value })
               }
@@ -133,7 +133,7 @@ export const Main = styled.main`
   margin-top: 70px;
   margin-right: 20px;
   margin-bottom: 80px;
-  margin-left: 120px;
+  margin-left: 150px;
 `;
 
 export const DivInputs = styled.div`
@@ -149,7 +149,7 @@ export const DivInputs = styled.div`
 
   button {
     color: #ffffff;
-    background-color: #4a4a59;
+    background-color: #4661ED;
     border: none;
     width: 300px;
     height: 65px;
@@ -184,15 +184,15 @@ export const Input = styled.input`
   border: none;
   border-radius: 6px;
   margin: 15px 0px;
-  font-size: 27px;
-  font-family: oswald;
+  font-size: 24px;
+  font-family: formular;
   ::placeholder {
     padding-left: 17px;
   }
 `;
 
 export const Welcome = styled.h1`
-  width: 600px;
+  width: 570px;
   font-size: 22px;
   text-align: center;
   margin-top: 50px;

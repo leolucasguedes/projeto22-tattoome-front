@@ -1,22 +1,24 @@
 import { useState, useEffect, useContext } from "react";
 import { userContext } from "../../contexts/userContext";
+import styled from "styled-components";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 
 import Header from "../../components/header";
 import CreateDepositionBox from "../../components/createDeposition";
 import SlideBox from "../../components/slideBox";
 import Logo from "./../../assets/imgs/logo.png";
-import { AiFillStar } from "react-icons/ai";
 import Footer from "../../components/footer";
-
+import * as stylized from "./style.js";
+import { AiFillStar } from "react-icons/ai";
 import image1 from "./../../assets/imgs/IMG1.jpg";
 import image2 from "./../../assets/imgs/IMG2.jpg";
 import image3 from "./../../assets/imgs/IMG3.jpg";
 
 function Home() {
   const [createBox, setCreateBox] = useState(false);
+  const [slide, setSlide] = useState(false);
+  const [square, setSquare] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
   const navigate = useNavigate();
   const { user } = useContext(userContext);
@@ -33,7 +35,7 @@ function Home() {
   ];
 
   useEffect(() => {
-    const promise = api.get('/deposition');
+    const promise = api.get("/deposition");
 
     promise.then((response) => {
       const { data } = response;
@@ -43,97 +45,119 @@ function Home() {
   }, []);
 
   function renderStars(stars) {
-      if(stars === 20)  return <Star />
-      if(stars === 40)  return <> <Star /> <Star /> </>
-      if(stars === 60)  return <> <Star /> <Star /> <Star /> </>
-      if(stars === 80)  return <> <Star /> <Star /> <Star /> <Star /> </>
-      if(stars === 100) return <> <Star /> <Star /> <Star /> <Star /> <Star /> </>
+    if(stars === 20)  return <Star />
+    if(stars === 40)  return <> <Star /> <Star /> </>
+    if(stars === 60)  return <> <Star /> <Star /> <Star /> </>
+    if(stars === 80)  return <> <Star /> <Star /> <Star /> <Star /> </>
+    if(stars === 100) return <> <Star /> <Star /> <Star /> <Star /> <Star /> </>
   }
 
   return (
     <>
       <Header />
-      <Main>
-        <DivUp>
-          <img src={Logo} alt="Logo" />
-          <h1>Venha fazer sua tattoo com quem ama a arte!</h1>
-          <Button onClick={() => navigate("/schedule")} type="submit">
-            Faça um orçamento!
-          </Button>
-        </DivUp>
-        <SlideBox slideImages={slideImages} />
-        <Div />
+      <stylized.Background>
+        <stylized.Main>
+          {square ? (
+            <stylized.DivUp>
+              <img src={Logo} alt="Logo" />
+              <h1>Venha fazer sua tattoo com quem ama a arte!</h1>
+              <stylized.Button
+                onClick={() => navigate("/schedule")}
+                onMouseOut={() => setSquare(false)}
+                type="submit"
+              >
+                Faça um orçamento!
+              </stylized.Button>
+            </stylized.DivUp>
+          ) : (
+            <stylized.NoDivUp>
+              <stylized.Button onMouseOver={() => setSquare(true)} type="submit">
+                Faça um orçamento!
+              </stylized.Button>
+            </stylized.NoDivUp>
+          )}
+          {slide ? (
+            <SlideBox slideImages={slideImages} />
+          ) : (
+            <stylized.ShowSlide onClick={() => setSlide(true)}>
+              Clique para ver as novidades!
+            </stylized.ShowSlide>
+          )}
+        </stylized.Main>
+      </stylized.Background>
+      <stylized.SubMain>
+        <stylized.Div />
         <h1>Depoimentos</h1>
-        <DivDepositions>
+        <stylized.DivDepositions>
           {testimonials ? (
             testimonials.map((testimonial, index) => {
               const { stars, text, username } = testimonial;
               return (
-                <Depositions key={index}>
-                  <DivStars>
-                    {renderStars(stars)}
-                  </DivStars>
+                <stylized.Depositions key={index}>
+                  <stylized.DivStars>{renderStars(stars)}</stylized.DivStars>
                   <p>{text}</p>
                   <h1> - {username}</h1>
-                </Depositions>
+                </stylized.Depositions>
               );
             })
           ) : (
             <></>
           )}
-        </DivDepositions>
+        </stylized.DivDepositions>
         {user ? (
           <>
-          <Comment onClick={() => setCreateBox(true)}>
-            Escreva um comentário
-          </Comment>
-        </>   
-        ) : (
-          <></>
-        )}
-        <Div />
-        {createBox ? (
-          <>
-            <CreateDepositionBox
-              setCreateBox={setCreateBox}
-              user={user}
-            />
+            <stylized.Comment onClick={() => setCreateBox(true)}>
+              Escreva um comentário
+            </stylized.Comment>
           </>
         ) : (
           <></>
         )}
-        <More>
-          <Box>
+        <stylized.Div />
+        {createBox ? (
+          <>
+            <CreateDepositionBox setCreateBox={setCreateBox} user={user} />
+          </>
+        ) : (
+          <></>
+        )}
+        <stylized.More>
+          <stylized.Box>
             <h1>Contato</h1>
-            <a href="https://wa.me/5521981698136" target="_blank" rel="noreferrer">
+            <a
+              href="https://wa.me/5521981698136"
+              target="_blank"
+              rel="noreferrer"
+            >
               <button>Enviar Mensagem</button>
             </a>
             <p>(21) 98169-8136</p>
-          </Box>
-          <Box>
+          </stylized.Box>
+          <stylized.Box>
             <h1>Endereço</h1>
             <a
               href="https://www.google.com.br/maps/place/R.+Nossa+Sra.+das+Merc%C3%AAs,+185+-+Fonseca,+Niter%C3%B3i+-+RJ,+24130-050/@-22.878866,-43.1051991,17z/data=!3m1!4b1!4m5!3m4!1s0x998383f60cde91:0x7cc67e0418fb5ee5!8m2!3d-22.878866!4d-43.1030104"
-              target="_blank" rel="noreferrer"
+              target="_blank"
+              rel="noreferrer"
             >
               <button>Ver Rotas</button>
             </a>
             <p>R. Nossa Senhora das Mercês 185 - apto 812 - Fonseca</p>
             <p>Rio de Janeiro - RJ</p>
             <p>24130-050</p>
-          </Box>
-          <Box>
+          </stylized.Box>
+          <stylized.Box>
             <h1>Horário de Funcionamento</h1>
-            <p>seg.: 08:00 - 18:00</p>
-            <p>ter.: 08:00 - 18:00</p>
-            <p>qua.: 08:00 - 18:00</p>
-            <p>qui.: 08:00 - 18:00</p>
-            <p>sex.: 08:00 - 18:00</p>
-            <p>sab.: 10:00 - 17:00</p>
-            <p>dom.: 10:00 - 14:00</p>
-          </Box>
-        </More>
-      </Main>
+            <p>segunda: 08:00 - 18:00</p>
+            <p>terça: 08:00 - 18:00</p>
+            <p>quarta: 08:00 - 18:00</p>
+            <p>quinta: 08:00 - 18:00</p>
+            <p>sexta: 08:00 - 18:00</p>
+            <p>sábado: 10:00 - 17:00</p>
+            <p>domingo: 10:00 - 14:00</p>
+          </stylized.Box>
+        </stylized.More>
+      </stylized.SubMain>
       <Footer />
     </>
   );
@@ -141,161 +165,8 @@ function Home() {
 
 export default Home;
 
-export const Main = styled.main`
-  width: 1200px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 70px;
-  margin-bottom: 80px;
-  margin-left: 120px;
-
-  img {
-    width: 80px;
-    height: 80px;
-    margin-top: 10px;
-  }
-  h1 {
-    font-family: oswald;
-    font-size: 22px;
-  }
-`;
-
-const Button = styled.button`
-  color: #ffffff;
-  background-color: #4a4a59;
-  border: none;
-  width: 429px;
-  height: 65px;
-  border-radius: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 27px;
-  font-family: oswald;
-  cursor: pointer;
-  margin-top: 30px;
-`;
-
-const DivUp = styled.div`
-  width: 620px;
-  height: 240px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 40px;
-  background-color: #ffffff;
-  margin-top: 30px;
-
-  h1 {
-    font-family: oswald;
-    font-size: 22px;
-    margin-top: 5px;
-  }
-`;
-
-export const Div = styled.div`
-  width: 50px;
-  height: 2px;
-  border-radius: 5px;
-  background-color: #000000;
-  margin-top: 50px;
-`;
-
-export const Comment = styled.p`
-  font-family: "Open Sans", sans-serif;
-  color: blue;
-  font-size: 16px;
-  text-decoration: underline;
-  margin-top: -50px;
-  margin-bottom: 50px;
-  cursor: pointer;
-`;
-
-export const DivDepositions = styled.div`
-  width: 940px;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  margin-top: 40px;
-  margin-left: 40px;
-  overflow-x: scroll;
-`;
-
-export const Depositions = styled.div`
-  width: 310px;
-  height: 180px;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-left: 2px;
-
-  p {
-    font-size: 14px;
-    margin-top: 25px;
-    line-height: 18px;
-  }
-  h1 {
-    color: #4a4a59;
-    font-family: oswald;
-    font-size: 16px;
-    margin-top: 25px;
-  }
-`;
-
-export const DivStars = styled.div`
-  width: 300px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  margin-left: 5px;
-`;
-
 const Star = styled(AiFillStar)`
   color: #fbbc2a;
   font-size: 18px;
   margin: 0 2px;
-`;
-
-export const More = styled.div`
-  width: 820px;
-  height: 210px;
-  display: flex;
-  align-items: center;
-  margin-top: 40px;
-  margin-left: 40px;
-`;
-
-export const Box = styled.div`
-  width: 240px;
-  height: 210px;
-  display: flex;
-  flex-direction: column;
-  margin-left: 30px;
-
-  h1 {
-    font-family: oswald;
-    font-size: 20px;
-    margin-top: 5px;
-  }
-  button {
-    color: #ffffff;
-    background-color: #4a4a59;
-    border: none;
-    width: 129px;
-    height: 35px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 14px;
-    font-family: oswald;
-    cursor: pointer;
-    margin-top: 20px;
-  }
-  p {
-    font-size: 14px;
-    margin-top: 10px;
-    line-height: 18px;
-  }
 `;

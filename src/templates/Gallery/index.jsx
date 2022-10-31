@@ -44,7 +44,7 @@ function Gallery() {
         </DivButtons>
         <Portfolio>
           {etapa === "" ? (
-            <NoPhotos>Bem vindo a galeria!</NoPhotos>
+            <NoPhotos>Bem vindo à galeria!</NoPhotos>
           ) : (
             filtro.map((image) => {
               const { id, imageURL } = image;
@@ -72,7 +72,7 @@ export const Main = styled.main`
 
 const Button = styled.button`
   color: #ffffff;
-  background-color: #4a4a59;
+  background-color: #030303;
   border: none;
   width: 120px;
   height: 45px;
@@ -80,8 +80,8 @@ const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 22px;
-  font-family: oswald;
+  font-size: 20px;
+  font-family: quarion;
   cursor: pointer;
   margin-top: 50px;
 `;
@@ -92,7 +92,7 @@ export const DivButtons = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-right: 150px;
+  margin-right: 165px;
 `;
 
 export const Portfolio = styled.div`
@@ -115,8 +115,8 @@ export const Photos = styled.img`
 `;
 
 export const NoPhotos = styled.h1`
-font-family: millenia;
+font-family: brisa-sans;
 font-size: 22px;
 margin-top: 50px;
-margin-left: 420px;
+margin-left: 380px;
 `;

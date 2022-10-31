@@ -4,7 +4,6 @@ import Footer from "../../components/footer";
 import { textAbout, textPlace } from "./text";
 
 import Artist from "./../../assets/imgs/artist.png";
-import Insta from "./../../assets/imgs/insta.jpg";
 
 function About(){
     return(
@@ -21,7 +20,7 @@ function About(){
               </DivPlace>
             </DivInfo>
             <a href="https://www.instagram.com/tattoomelet/" target="_blank" rel="noreferrer">
-            <img src={Insta} alt="Instagram" />
+            <Insta>Quer saber mais sobre ou ver mais dos trabalhos? Veja o Instagram @tattoomelet</Insta>
             </a>
         </Main>
         <Footer />
@@ -36,19 +35,9 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
+  margin-top: 60px;
   margin-bottom: 80px;
-  margin-left: 120px;
-
-  img {
-    width: 300px;
-    height: 320px;
-    border-radius: 6px;
-    margin-top: -130px;
-    margin-bottom: 100px;
-    margin-right: 80px;
-    cursor: pointer;
-  }
+  margin-left: 150px;
 `;
 
 export const DivInfo = styled.div`
@@ -63,6 +52,13 @@ export const DivInfo = styled.div`
   margin-right: 80px;
 `;
 
+export const Insta = styled.h1`
+  font-family: brisa-sans;
+  font-size: 18px;
+  margin-top: -100px;
+  margin-right: 25px;
+`;
+
 export const DivPerson = styled.div`
   width: 500px;
   height: 200px;
@@ -75,7 +71,8 @@ export const DivPerson = styled.div`
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    margin-top: 40px;
+    margin-top: 10px;
+    margin-right: 20px;
   }
 
   p{

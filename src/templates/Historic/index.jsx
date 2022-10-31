@@ -8,7 +8,7 @@ import Footer from "../../components/footer";
 function Historic() {
   const [budgets, setBudgets] = useState([]);
   const { user } = useContext(userContext);
-  const { sendUser } = user
+  const { sendUser } = user;
   const { id, name } = sendUser;
 
   useEffect(() => {
@@ -26,20 +26,20 @@ function Historic() {
       <Header />
       <Main>
         <DivInfo>
-          <h1>Olá, {name}</h1>
-            {budgets.map((budget, index) => {
-              const { email, number, description, size } = budget;
-              return (
-                <Budget key={index}>
-                  <div className="upside">
-                    <h1>{email}</h1>
-                    <h2>{number}</h2>
-                  </div>
-                  <p>{description}</p>
-                  <h3>{size}</h3>
-                </Budget>
-              );
-            })}
+          <h1>Olá {name}, aqui estão seus orçamentos anteriores!</h1>
+          {budgets.map((budget, index) => {
+            const { email, number, description, size } = budget;
+            return (
+              <Budget key={index}>
+                <div className="upside">
+                  <h1>{email}</h1>
+                  <h2>{number}</h2>
+                </div>
+                <p>{description}</p>
+                <h3>{size}</h3>
+              </Budget>
+            );
+          })}
         </DivInfo>
       </Main>
       <Footer />
@@ -71,8 +71,8 @@ export const DivInfo = styled.div`
   margin-right: 80px;
 
   h1 {
-    font-family: oswald;
-    font-size: 22px;
+    font-family: brisa-sans;
+    font-size: 21px;
     margin-bottom: 40px;
   }
 `;
@@ -87,32 +87,37 @@ export const Budget = styled.div`
   border: solid 1px gray;
   border-radius: 6px;
   margin-bottom: 20px;
+  position: relative;
 
   h1 {
     font-family: oswald;
     font-size: 20px;
-    margin-top: 12px;
-    margin-left: 20px;
+    font-weight: 500;
+    position: absolute;
+    top: 11px;
+    left: 22px;
   }
   h2 {
     font-family: oswald;
     font-size: 18px;
-    margin-top: 12px;
-    margin-left: 80px;
+    position: absolute;
+    top: 12px;
+    left: 250px;
   }
 
   p {
     font-size: 14px;
     line-height: 20px;
     margin-left: 20px;
-    margin-top: -25px;
+    margin-top: 40px;
   }
 
   h3 {
     font-family: oswald;
     font-size: 16px;
-    margin-top: 20px;
-    margin-left: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 22px;
   }
 
   .upside {

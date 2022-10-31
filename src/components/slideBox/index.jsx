@@ -29,7 +29,9 @@ const ContainerBox = styled.div`
   border: solid 5px #000000;
   border-radius: 6px;
   background-color: #ffffff;
-  position: relative;
+  position: absolute;
+  top: 370px;
+  right: 450px;
   margin-top: 50px;
   margin-bottom: 100px;
 `;

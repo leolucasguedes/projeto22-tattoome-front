@@ -31,6 +31,7 @@ const Bot = styled.footer`
     color: #7d9386;
     font-size: 12px;
     line-height: 18px;
+    margin-right: 30px;
   }
 `;
 

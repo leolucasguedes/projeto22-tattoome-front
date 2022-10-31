@@ -1,13 +1,33 @@
-@font-face{
+@font-face {
     src: url(../../assets/fonts/MilleniaPersonalUse-w1OB8.ttf);
     font-family: millenial;
-  }
-  
-*{
+}
+
+@font-face {
+    src: url(../../assets/fonts/quarion-medium.otf);
+    font-family: quarion;
+}
+
+@font-face {
+    src: url(../../assets/fonts/BrisaSans-Medium.otf);
+    font-family: brisa-sans;
+}
+
+@font-face {
+    src: url(../../assets/fonts/news_gothic_demi_bt.ttf);
+    font-family: news-gothic;
+}
+
+@font-face {
+    src: url(../../assets/fonts/Formular-Light.ttf);
+    font-family: formular;
+}
+
+* {
     box-sizing: border-box;
 }
 
-body{
+body {
     display: flex;
     justify-content: center;
     background-color: #efeef3;
