@@ -51,8 +51,8 @@ export default function Signup() {
           <input
             type="text"
             placeholder="Nome"
-            onChange={(e) => setSignUp({ ...signUp, username: e.target.value })}
-            value={signUp.username}
+            onChange={(e) => setSignUp({ ...signUp, name: e.target.value })}
+            value={signUp.name}
             required
           ></input>
           <input
@@ -70,7 +70,7 @@ export default function Signup() {
             required
           ></input>
           <input
-            type="text"
+            type="password"
             placeholder="Confirme a senha"
             onChange={(e) =>
               setSignUp({ ...signUp, confirmPassword: e.target.value })

@@ -8,6 +8,7 @@ import Logo from "./../../assets/imgs/logo.png";
 function Header() {
   const [selected, setSelected] = useState(false);
   const [nav, setNav] = useState(true);
+  const [logged, setLogged] = useState(false);
   const navigate = useNavigate();
   let id;
   let name;
@@ -19,8 +20,17 @@ function Header() {
   }
   let ref = useRef();
 
+  useEffect(() => {
+    const userLocalStorage = localStorage.getItem("user");
+
+    if (userLocalStorage) {
+      setLogged(true);
+    }
+  }, []);
+
   function signOut() {
     localStorage.removeItem("user");
+    setLogged(false);
     navigate("/signin");
   }
 
@@ -63,7 +73,7 @@ function Header() {
                 <stylized.AboutIc />
                 <h1>Sobre</h1>
               </Link>
-              {user ? (
+              {logged ? (
                 <Link to={`/budget/user/${id}`}>
                   <stylized.HistoricIc />
                   <h1>Histórico</h1>
@@ -93,7 +103,7 @@ function Header() {
           ) : (
             <stylized.More onClick={() => setSelected(!selected)} />
           )}
-          {user ? (
+          {logged ? (
             <stylized.RightName>
               <h1>Olá, {name}</h1>
             </stylized.RightName>
