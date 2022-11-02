@@ -205,10 +205,13 @@ export const HistoricIc = styled(AiFillSchedule)`
 
 export const More = styled(MdOutlineExpandMore)`
   position: absolute;
-  top: 10px;
+  top: 8px;
   right: 25px;
+  background-color: ${props => props.selected ? "#A09FA2" : ""};
+  border-radius: 50%;
+  padding: 5px;
   color: #030303;
-  font-size: 24px;
+  font-size: 29px;
   cursor: pointer;
 `;
 

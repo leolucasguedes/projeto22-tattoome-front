@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Header from "../../components/header";
 import Footer from "../../components/footer";
 
+import { BsTrash } from "react-icons/bs";
+
 function Historic() {
   const [budgets, setBudgets] = useState([]);
   const { user } = useContext(userContext);
@@ -21,6 +23,14 @@ function Historic() {
     promise.catch((err) => console.log(err.response));
   }, [id]);
 
+  function deleteBudget(id) {
+    const promise = api.delete(`/budget/${id}`);
+    promise.then(() => {
+      window.location.reload(false);
+    });
+    promise.catch((err) => console.log(err.response));
+  }
+
   return (
     <>
       <Header />
@@ -28,9 +38,10 @@ function Historic() {
         <DivInfo>
           <h1>Olá {name}, aqui estão seus orçamentos anteriores!</h1>
           {budgets.map((budget, index) => {
-            const { email, number, description, size } = budget;
+            const { id, email, number, description, size } = budget;
             return (
               <Budget key={index}>
+                <Trash onClick={() => deleteBudget(id)} />
                 <div className="upside">
                   <h1>{email}</h1>
                   <h2>{number}</h2>
@@ -123,4 +134,13 @@ export const Budget = styled.div`
   .upside {
     display: flex;
   }
+`;
+
+export const Trash = styled(BsTrash)`
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  color: #030303;
+  font-size: 17px;
+  cursor: pointer;
 `;

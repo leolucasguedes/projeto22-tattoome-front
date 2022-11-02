@@ -31,7 +31,8 @@ function Header() {
   function signOut() {
     localStorage.removeItem("user");
     setLogged(false);
-    navigate("/signin");
+    navigate("/");
+    window.location.reload(false);
   }
 
   useEffect(() => {
@@ -91,17 +92,24 @@ function Header() {
         </stylized.Left>
         <stylized.Center>Tattoo me Let</stylized.Center>
         <stylized.Right>
-          <stylized.Person onClick={() => setSelected(!selected)} />
+          {logged ? (
+            <>
+              <stylized.Person onClick={() => setSelected(!selected)} />
+              <stylized.More selected={selected} onClick={() => setSelected(!selected)} />
+            </>
+          ) : (
+              <stylized.Person />
+          )}
+
           {selected ? (
             <>
-              <stylized.Less onClick={() => setSelected(!selected)} />
               <stylized.Logout onClick={() => signOut()}>
                 <stylized.GoOut onClick={() => setSelected(!selected)} />
                 <h3>Sair da conta</h3>
               </stylized.Logout>
             </>
           ) : (
-            <stylized.More onClick={() => setSelected(!selected)} />
+            <></>
           )}
           {logged ? (
             <stylized.RightName>

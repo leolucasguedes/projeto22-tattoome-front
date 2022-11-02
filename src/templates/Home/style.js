@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 import background from "./../../assets/imgs/background.gif";
+import { BsTrash } from 'react-icons/bs';
 
 export const Background = styled.div`
   width: 1667px;
@@ -99,8 +100,9 @@ export const Comment = styled.p`
   color: blue;
   font-size: 16px;
   text-decoration: underline;
-  margin-top: -50px;
-  margin-bottom: 50px;
+  position: absolute;
+  bottom: -390px;
+  right: 800px;
   cursor: pointer;
 `;
 
@@ -112,6 +114,7 @@ export const DivDepositions = styled.div`
   margin-top: 40px;
   margin-left: 40px;
   overflow-x: scroll;
+  position: relative;
 `;
 
 export const Depositions = styled.div`
@@ -121,6 +124,7 @@ export const Depositions = styled.div`
   flex-direction: column;
   align-items: flex-start;
   margin-left: 2px;
+  position: relative;
 
   p {
     font-size: 14px;
@@ -207,4 +211,13 @@ export const Box = styled.div`
     margin-top: 10px;
     line-height: 18px;
   }
+`;
+
+export const Trash = styled(BsTrash)`
+  position: absolute;
+  top: 1px;
+  right: 45px;
+  color: #030303;
+  font-size: 17px;
+  cursor: pointer;
 `;

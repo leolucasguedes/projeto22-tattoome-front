@@ -1,6 +1,5 @@
 import { useState } from "react";
 import api from "../../services/api";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { Rating } from "react-simple-star-rating";
 import { IoClose } from "react-icons/io5";
@@ -8,19 +7,19 @@ import { IoClose } from "react-icons/io5";
 function CreateDepositionBox(props) {
   const { setCreateBox, user } = props;
   const { sendUser } = user;
-  const { token, name } = sendUser;
+  const { token, id, name } = sendUser;
   const [loading, setLoading] = useState(false);
   const [rating, setRating] = useState(0);
   const [deposition, setDeposition] = useState({
     stars: 0,
     text: "",
-    username: "",
+    username: name,
+    userId: id,
   });
-  const navigate = useNavigate();
 
   const handleRating = (rate) => {
     setRating(rate);
-    setDeposition({ stars: rate });
+    setDeposition({ ...deposition, stars: rate });
   };
 
   function sendDeposition(e) {
@@ -34,7 +33,7 @@ function CreateDepositionBox(props) {
     promise.then((res) => {
       setLoading(false);
       setCreateBox(false);
-      navigate("/");
+      window.location.reload(false);
     });
     promise.catch((e) => {
       const message = e.response.data;
@@ -80,7 +79,7 @@ function CreateDepositionBox(props) {
               onChange={(e) =>
                 setDeposition({ ...deposition, username: e.target.value })
               }
-              value={name}
+              value={deposition.username}
               required
             ></Input>
             <Button />

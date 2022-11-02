@@ -15,7 +15,7 @@ function Schedule() {
  
   let userId = "";
   if (user) {
-    userId = user.id;
+    userId = user.sendUser.id;
   }
   
   const [loading, setLoading] = useState(false);

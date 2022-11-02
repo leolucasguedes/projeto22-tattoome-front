@@ -19,6 +19,7 @@ function Home() {
   const [createBox, setCreateBox] = useState(false);
   const [slide, setSlide] = useState(false);
   const [square, setSquare] = useState(false);
+  const [logged, setLogged] = useState(false);
   const [testimonials, setTestimonials] = useState([]);
   const navigate = useNavigate();
   const { user } = useContext(userContext);
@@ -35,6 +36,14 @@ function Home() {
   ];
 
   useEffect(() => {
+    const userLocalStorage = localStorage.getItem("user");
+
+    if (userLocalStorage) {
+      setLogged(true);
+    }
+  }, []);
+
+  useEffect(() => {
     const promise = api.get("/deposition");
 
     promise.then((response) => {
@@ -43,6 +52,21 @@ function Home() {
     });
     promise.catch((err) => console.log(err.response));
   }, []);
+
+  function deleteDeposition(id) {
+    const { sendUser } = user;
+    const { token } = sendUser;
+    const promise = api.delete(`/deposition/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    promise.then(() => {
+      window.location.reload(false);
+    });
+    promise.catch((err) => console.log(err.response));
+  }
 
   function renderStars(stars) {
     if(stars === 20)  return <Star />
@@ -71,7 +95,10 @@ function Home() {
             </stylized.DivUp>
           ) : (
             <stylized.NoDivUp>
-              <stylized.Button onMouseOver={() => setSquare(true)} type="submit">
+              <stylized.Button
+                onMouseOver={() => setSquare(true)}
+                type="submit"
+              >
                 Faça um orçamento!
               </stylized.Button>
             </stylized.NoDivUp>
@@ -91,20 +118,31 @@ function Home() {
         <stylized.DivDepositions>
           {testimonials ? (
             testimonials.map((testimonial, index) => {
-              const { stars, text, username } = testimonial;
-              return (
-                <stylized.Depositions key={index}>
-                  <stylized.DivStars>{renderStars(stars)}</stylized.DivStars>
-                  <p>{text}</p>
-                  <h1> - {username}</h1>
-                </stylized.Depositions>
-              );
+              const { id, stars, text, username, userId } = testimonial;
+              if (user !== null && user.sendUser.id === userId) {
+                return (
+                  <stylized.Depositions key={index}>
+                    <stylized.DivStars>{renderStars(stars)}</stylized.DivStars>
+                    <stylized.Trash onClick={() => deleteDeposition(id)} />
+                    <p>{text}</p>
+                    <h1> - {username}</h1>
+                  </stylized.Depositions>
+                );
+              } else {
+                return (
+                  <stylized.Depositions key={index}>
+                    <stylized.DivStars>{renderStars(stars)}</stylized.DivStars>
+                    <p>{text}</p>
+                    <h1> - {username}</h1>
+                  </stylized.Depositions>
+                );
+              }
             })
           ) : (
             <></>
           )}
         </stylized.DivDepositions>
-        {user ? (
+        {logged ? (
           <>
             <stylized.Comment onClick={() => setCreateBox(true)}>
               Escreva um comentário

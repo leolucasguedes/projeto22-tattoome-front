@@ -56,7 +56,7 @@ export const Insta = styled.h1`
   font-family: brisa-sans;
   font-size: 18px;
   margin-top: -100px;
-  margin-right: 25px;
+  margin-right: 40px;
 `;
 
 export const DivPerson = styled.div`
