@@ -37,7 +37,7 @@ TattooMeLet-front is an application of a tattoo studio. You can create an accoun
 
 To run this project, you will need to add the following environment variables to your .env file
 
-`REACT_API_URL = http://Hostname:Port/`
+`REACT_APP_API_BASE_URL = http://Hostname:Port/`
 
 </br>
 
