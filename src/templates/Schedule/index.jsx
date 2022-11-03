@@ -13,7 +13,7 @@ function Schedule() {
   const navigate = useNavigate();
   const { user } = useContext(userContext);
  
-  let userId = "";
+  let userId;
   if (user) {
     userId = user.sendUser.id;
   }
